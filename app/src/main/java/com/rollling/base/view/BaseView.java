@@ -8,9 +8,9 @@ package com.rollling.base.view;
 
 public interface BaseView<T> {
 
-    void succeed(T t, int tag);
+    void succeed(String t, int tag);
 
-    void error(T t, int tag);
+    void error(String t, int tag);
 
     void responseCode(int code);
 }

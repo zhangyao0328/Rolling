@@ -2,21 +2,38 @@ package com.rollling.act.main;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
-import android.widget.TextView;
 
+import com.jpeng.jptabbar.JPTabBar;
 import com.rollling.R;
+import com.rollling.act.login.LoginActivity;
+import com.rollling.act.main.frament.DiscoverFragment;
+import com.rollling.act.main.frament.HomeFragment;
+import com.rollling.act.main.frament.MessageFragment;
+import com.rollling.act.main.frament.MineFragment;
 import com.rollling.base.view.BaseActivity;
+import com.rollling.bean.MyUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
+import cn.bmob.v3.BmobUser;
 
-public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends BaseActivity implements ViewPager.OnPageChangeListener, BottomNavigationView.OnNavigationItemSelectedListener{
 
-    @BindView(R.id.message)
-    TextView mTextMessage;
+    @BindView(R.id.viewPager)
+    ViewPager viewPager;
 
     @BindView(R.id.navigation)
-    BottomNavigationView navigation;
+    JPTabBar navigation;
+
+    private FragmentPagerAdapter pagerAdapter;
+
+    private List<Fragment> fragmentList;
 
     @Override
     public int getLayoutContextView() {
@@ -25,39 +42,93 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     public void init() {
-        navigation.setOnNavigationItemSelectedListener(this);
+        initNavigationBar();
+        initViewPage();
 
-        getLoad("https://api.paipianbang.com/api/v2/activities/hot_posts?per_page=20&page=1&token=9a5c14256cd612bdfbbf", null, null, 111, true);
+        if(BmobUser.getCurrentUser(MyUser.class) == null){
+            openActivity(LoginActivity.class);
+        }else {
+            MyUser myUser = BmobUser.getCurrentUser(MyUser.class);
+        }
+    }
+
+    private void initNavigationBar() {
+
+        navigation
+                .setNormalIcons(R.drawable.ic_home_black_24dp, R.drawable.ic_notifications_black_24dp, R.drawable.ic_dashboard_black_24dp, R.drawable.ic_launcher_foreground)
+                .generate();
+
+        navigation.setContainer(viewPager);
+    }
+
+    private void initViewPage(){
+
+        fragmentList = new ArrayList<>();
+        fragmentList.add(new HomeFragment());
+        fragmentList.add(new DiscoverFragment());
+        fragmentList.add(new MessageFragment());
+        fragmentList.add(new MineFragment());
+
+        pagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return fragmentList.get(position);
+            }
+
+            @Override
+            public int getCount() {
+                return fragmentList.size();
+            }
+        };
+
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.addOnPageChangeListener(this);
+        viewPager.setOffscreenPageLimit(fragmentList.size());
+
+
+
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.navigation_home:
-                mTextMessage.setText(R.string.title_home);
                 return true;
             case R.id.navigation_dashboard:
-                mTextMessage.setText(R.string.title_dashboard);
                 return true;
             case R.id.navigation_notifications:
-                mTextMessage.setText(R.string.title_notifications);
                 return true;
         }
         return false;
     }
 
     @Override
-    public void succeed(Object o, int tag) {
-        mTextMessage.setText(o.toString());
+    public void succeed(String t, int tag) {
+
     }
 
     @Override
-    public void error(Object o, int tag) {
+    public void error(String t, int tag) {
 
     }
 
     @Override
     public void responseCode(int code) {
+
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
 
     }
 }

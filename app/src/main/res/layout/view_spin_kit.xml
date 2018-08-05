@@ -16,7 +16,7 @@
 
     <com.rollling.view.TextViewIcon
         android:id="@+id/tvMessage"
-        style="@style/tvStyle1"
+        style="@style/styleUserName"
         android:layout_marginTop="10dp"
         />
 </LinearLayout>

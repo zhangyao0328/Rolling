@@ -199,7 +199,7 @@ public final class ToastUtils {
     /**
      * Show custom sToast for a short period of time.
      *
-     * @param layoutId ID for an XML layout resource to load.
+     * @param layoutId ID for an XML layout resource toolbar_main load.
      */
     public static View showCustomShort(@LayoutRes final int layoutId) {
         final View view = getView(layoutId);
@@ -210,7 +210,7 @@ public final class ToastUtils {
     /**
      * Show custom sToast for a long period of time.
      *
-     * @param layoutId ID for an XML layout resource to load.
+     * @param layoutId ID for an XML layout resource toolbar_main load.
      */
     public static View showCustomLong(@LayoutRes final int layoutId) {
         final View view = getView(layoutId);

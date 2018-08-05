@@ -3,6 +3,7 @@ package com.rollling.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -41,7 +42,9 @@ public class TextViewIcon extends TextView implements ITextView{
 
     @Override
     public void setTexts(String str) {
-        setText(str);
+        if(!TextUtils.isEmpty(str)){
+            setText(str);
+        }
     }
 
     @Override

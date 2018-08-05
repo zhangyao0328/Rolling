@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval"
+    >
+
+
+    <solid android:color="@color/colorPrimaryDark"></solid>
+
+    <size android:width="@dimen/banner_point_n_w"></size>
+    <size android:height="@dimen/banner_point_n_w"></size>
+    <padding android:bottom="@dimen/banner_point_n_w"></padding>
+    <corners android:radius="@dimen/banner_point_d_w"></corners>
+    <stroke android:color="@android:color/transparent" android:width="@dimen/banner_point_d_w"></stroke>
+
+</shape>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/ToolbarStyle"
+    app:contentInsetStart="0dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@drawable/ic_dashboard_black_24dp"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--/>-->
+
+        <com.rollling.view.TextViewIcon
+            style="@style/tvStyle1"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/colorAccent"
+            android:layout_centerInParent="true"
+            android:textAllCaps="true"
+            />
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.Toolbar>

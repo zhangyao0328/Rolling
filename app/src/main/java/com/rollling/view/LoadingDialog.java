@@ -53,4 +53,17 @@ public class LoadingDialog extends AlertDialog {
         }
     }
 
+    @Override
+    public void dismiss() {
+        if(this != null){
+            super.dismiss();
+        }
+    }
+
+    @Override
+    public void show() {
+        if(this != null){
+            super.show();
+        }
+    }
 }
