@@ -55,7 +55,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     private void initNavigationBar() {
 
         navigation
-                .setNormalIcons(R.drawable.ic_home_black_24dp, R.drawable.ic_notifications_black_24dp, R.drawable.ic_dashboard_black_24dp, R.drawable.ic_launcher_foreground)
+                .setNormalIcons(R.drawable.ic_home_black_24dp, R.drawable.ic_notifications_black_24dp, R.drawable.ic_dashboard_black_24dp, R.drawable.ic_dashboard_black_24dp)
                 .generate();
 
         navigation.setContainer(viewPager);

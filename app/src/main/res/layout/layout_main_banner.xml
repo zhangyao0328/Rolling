@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         fresco:placeholderImage="@color/colorPrimaryDark"
-        fresco:viewAspectRatio="0.75"
         />
 
     <com.rollling.view.Black2White2BlackGradint

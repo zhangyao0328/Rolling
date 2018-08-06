@@ -13,6 +13,7 @@
     <string name="sign_password_empty">请输入密码</string>
     <string name="sign_up">注册</string>
     <string name="sign_in">登录</string>
+    <string name="sign_username_already">该账号已经被使用，请切换其他账号</string>
 
 
 </resources>

@@ -1,9 +1,11 @@
 package com.rollling.holder;
 
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.rollling.R;
+import com.rollling.act.main.frament.HomeFragment;
 import com.rollling.bean.MainBannerBean;
 import com.rollling.view.FrescoImage;
 import com.rollling.view.TextViewIcon;
@@ -31,6 +33,8 @@ public class BannerImageHolderView extends Holder<MainBannerBean> {
     public BannerImageHolderView(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
+
+        frescoImage.setLayoutParams(new FrameLayout.LayoutParams(HomeFragment.bannerW, HomeFragment.bannerH));
     }
 
     @Override

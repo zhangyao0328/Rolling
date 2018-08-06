@@ -61,16 +61,19 @@ public class LoginActivity extends BaseActivity{
     public void signUp(){
         if(TextUtils.isEmpty(userName.getText().toString().trim())){
             ToastUtils.showShort(R.string.sign_username_empty);
+            return;
         }
         if(TextUtils.isEmpty(password.getText().toString().trim())){
             ToastUtils.showShort(R.string.sign_password_empty);
+            return;
         }
         BmomManageUtils bmomManageUtils = new BmomManageUtils(true);
         BmobUser bmobUser = new BmobUser();
         bmobUser.setUsername(userName.getText().toString().trim());
         bmobUser.setPassword(password.getText().toString().trim());
-        bmobUser.setMobilePhoneNumber(userName.getText().toString().trim());
-        bmomManageUtils.registerUser(bmobUser);
+//        bmobUser.setMobilePhoneNumber(userName.getText().toString().trim());
+//        bmomManageUtils.registerUser(bmobUser);
+        bmomManageUtils.login(bmobUser);
     }
 }
 

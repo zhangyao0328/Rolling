@@ -43,6 +43,8 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.titleBanner)
     TextViewIcon titleBanner;
 
+    public static int bannerW, bannerH;
+
     private ArrayList<MainBannerBean> localImages = new ArrayList<MainBannerBean>();
 
     @Override
@@ -55,7 +57,9 @@ public class HomeFragment extends BaseFragment {
 
         //通知系统主动测试toolbar高度
         toolbar.measure(0,0);
-        layoutBanner.setLayoutParams(new LinearLayout.LayoutParams(ScreenUtils.getScreenWidth(), (int) (ScreenUtils.getScreenHeight()) / 4 * 3 - toolbar.getMeasuredHeight()));
+        bannerW = ScreenUtils.getScreenWidth();
+        bannerH = (ScreenUtils.getScreenHeight()) / 4 * 3 - toolbar.getMeasuredHeight();
+        layoutBanner.setLayoutParams(new LinearLayout.LayoutParams(bannerW, bannerH));
 
     }
 

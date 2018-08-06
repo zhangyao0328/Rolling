@@ -49,6 +49,9 @@ public class BmomManageUtils {
                     }else {
                         ToastUtils.showLong(e.getMessage());
                         LogUtils.e(e.getMessage());
+                        if(e.getErrorCode() == 202){
+                            ToastUtils.showLong(R.string.sign_username_already);
+                        }
                     }
                 }
             });
@@ -67,7 +70,7 @@ public class BmomManageUtils {
                     if(e == null){
                         ToastUtils.showLong("登录成功");
                     }else {
-                        ToastUtils.showLong("登录失败" + e.getMessage());
+                        ToastUtils.showLong(e.getMessage());
                         LogUtils.e("登录失败" + e.getMessage());
                     }
                 }
