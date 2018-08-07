@@ -16,6 +16,7 @@ import com.rollling.act.main.frament.MessageFragment;
 import com.rollling.act.main.frament.MineFragment;
 import com.rollling.base.view.BaseActivity;
 import com.rollling.bean.MyUser;
+import com.rollling.view.RollingViewPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ import cn.bmob.v3.BmobUser;
 public class MainActivity extends BaseActivity implements ViewPager.OnPageChangeListener, BottomNavigationView.OnNavigationItemSelectedListener{
 
     @BindView(R.id.viewPager)
-    ViewPager viewPager;
+    RollingViewPage viewPager;
 
     @BindView(R.id.navigation)
     JPTabBar navigation;
@@ -81,6 +82,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
             }
         };
 
+//        viewPager.setCanScroll(false);
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(this);
         viewPager.setOffscreenPageLimit(fragmentList.size());

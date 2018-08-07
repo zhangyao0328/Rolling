@@ -55,13 +55,16 @@ public class MessageFragment extends BaseFragment {
         }
 
         MessageAdapter messageAdapter = new MessageAdapter(R.layout.item_message_list, messageBenas);
-        messageAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
+        messageAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM);
         messageAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
 
             }
         }, rollingRecyclerView);
+
+
+
         rollingRecyclerView.setAdapter(messageAdapter);
 
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
@@ -7,28 +7,37 @@
     android:layout_height="match_parent"
     tools:context=".act.main.MainActivity">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
+
+    <include layout="@layout/view_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginBottom="?android:attr/actionBarSize"
-        />
+        ></include>
 
-    <com.jpeng.jptabbar.JPTabBar
-        android:id="@+id/navigation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
+
+    <FrameLayout
+        android:id="@+id/layoutTab"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_alignParentBottom="true"
         android:elevation="10dp"
-        app:TabAnimate="Scale"
-        app:TabIconFilter="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:TabSelectColor="@android:color/black"
-        app:TabNormalColor="@android:color/darker_gray"
-        />
+        android:background="@color/colorPrimary"
+        >
 
-</android.support.constraint.ConstraintLayout>
+        <com.jpeng.jptabbar.JPTabBar
+            android:id="@+id/navigation"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            app:TabAnimate="Scale"
+            app:TabIconFilter="true"
+            app:TabSelectColor="@android:color/black"
+            app:TabNormalColor="@android:color/darker_gray"
+            />
+
+        </FrameLayout>
+
+
+
+</RelativeLayout>

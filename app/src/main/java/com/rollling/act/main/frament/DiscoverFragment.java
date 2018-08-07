@@ -1,15 +1,19 @@
 package com.rollling.act.main.frament;
 
+import android.support.v4.app.Fragment;
+
 import com.rollling.R;
-import com.rollling.base.view.BaseFragment;
-import com.rollling.bean.main.TestBean;
+import com.rollling.base.view.BaseTabFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author zhangyao
  * @date 2018/8/4  00:59
  * @E-mail android_n@163.com
  */
-public class DiscoverFragment extends BaseFragment {
+public class DiscoverFragment extends BaseTabFragment {
     @Override
     public int getLayoutContextView() {
         return R.layout.fragment_discover;
@@ -18,6 +22,12 @@ public class DiscoverFragment extends BaseFragment {
     @Override
     public void init() {
 
+        setHeadView(R.array.my_discover_tab);
+        List<Fragment> fragmentList = new ArrayList<>();
+        for (String s : getResources().getStringArray(R.array.my_discover_tab)){
+            fragmentList.add(new DiscoverChildFragment());
+        }
+        setViewPager(fragmentList);
     }
 
     @Override
@@ -28,14 +38,6 @@ public class DiscoverFragment extends BaseFragment {
     @Override
     public void firstLoadDate() {
 
-        TestBean testBean = new TestBean();
-        testBean.setName("YAOYAOYAOYAO");
-        testBean.setAddress("内蒙古呼和浩特");
-        TestBean.UserBean userBean = new TestBean.UserBean();
-        userBean.setNickName("二十二");
-        testBean.setUserBean(userBean);
-
-        savaData(testBean, 111, true);
     }
 
     @Override

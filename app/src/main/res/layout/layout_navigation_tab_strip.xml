@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.gigamole.navigationtabstrip.NavigationTabStrip
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigationTab"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:layout_gravity="bottom"
+    android:fillViewport="false"
+    app:nts_active_color="@android:color/black"
+    app:nts_animation_duration="300"
+    app:nts_color="@android:color/black"
+    app:nts_corners_radius="1.5dp"
+    app:nts_factor="2.5"
+    app:nts_gravity="bottom"
+    app:nts_inactive_color="@color/colorAccent"
+    app:nts_size="15sp"
+    app:nts_type="line"
+    app:nts_typeface="fonts/gtw.ttf"
+    app:nts_weight="3dp"
+    />

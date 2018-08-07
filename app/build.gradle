@@ -42,4 +42,5 @@ dependencies {
     implementation 'com.bigkoo:ConvenientBanner:2.1.4'
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
+    implementation 'com.github.devlight.navigationtabstrip:navigationtabstrip:1.0.4'
 }

@@ -8,5 +8,13 @@
         <item>我的</item>
     </string-array>
 
+    <string-array name="my_discover_tab">
+        <item>古着</item>
+        <item>机车</item>
+        <item>户外</item>
+        <item>影像</item>
+        <item>文化</item>
+    </string-array>
+
 
 </resources>
