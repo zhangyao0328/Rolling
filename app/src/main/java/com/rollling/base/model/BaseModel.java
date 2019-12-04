@@ -12,6 +12,8 @@ import com.rollling.bean.BaseBean;
 
 public interface BaseModel {
 
-    void saveData(Context context, BaseBean baseBean);
+    void loadGet(Context context,  BaseBean baseBean);
+
+    void loadPost(Context context,  BaseBean baseBean);
 
 }

@@ -12,15 +12,8 @@ import android.view.ViewGroup;
 import com.rollling.base.prsenter.BasePresenter;
 import com.rollling.base.prsenter.BasePresenterImpl;
 import com.rollling.bean.BaseBean;
-import com.rollling.bean._Article;
-import com.rollling.bean.main.TestBean;
-import com.rollling.util.LogUtils;
 
 import butterknife.ButterKnife;
-import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.QueryListener;
 
 /**
  * @author zhangyao
@@ -111,38 +104,18 @@ public abstract class BaseFragment extends Fragment implements BaseView{
         firstLoadDate();
     }
 
-    /**
-     * 添加数据
-     * @param bmobObject
-     * @param tag
-     * @param isShowLoding
-     */
-    public void savaData(final BmobObject bmobObject, final int tag, boolean isShowLoding){
+    public void getLoad(String url, String[] key, String[] value, int tag, boolean isDialog) {
         if (basePresenter == null) {
             basePresenter = new BasePresenterImpl(getActivity(), this);
         }
-        basePresenter.saveData(getActivity(), new BaseBean(bmobObject, tag, isShowLoding));
+        BaseBean baseBean = new BaseBean(url, key, value, tag, isDialog);
+        basePresenter.getAsync(getActivity(), baseBean);
     }
 
-    /**
-     * 获取一行数据
-     * @param objectID
-     */
-    public void getData(TestBean BmobObject, String objectID){
+    @Override
+    public void responseCode(int code) {
 
-        BmobQuery<_Article> bmobQuery = new BmobQuery<_Article>();
-        objectID = "hDnzWWWa";
-        //查找Person表里面id为6b6c11c537的数据
-        bmobQuery.getObject(objectID, new QueryListener<_Article>() {
-            @Override
-            public void done(_Article object,BmobException e) {
-                if(e==null){
-                    LogUtils.e("查询成功" + object.toString());
-                }else{
-                    LogUtils.e("查询失败：" + e.getMessage());
-                }
-            }
-        });
     }
+
 
 }

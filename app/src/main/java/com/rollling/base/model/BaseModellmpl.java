@@ -5,12 +5,17 @@ import android.content.Context;
 import com.rollling.R;
 import com.rollling.base.view.BaseView;
 import com.rollling.bean.BaseBean;
-import com.rollling.util.LogUtils;
-import com.rollling.util.ToastUtils;
+import com.rollling.net.HttpManage;
+import com.rollling.net.ResultCallback;
+import com.rollling.util.CineLog;
+import com.rollling.util.CineToast;
 import com.rollling.view.LoadingDialog;
 
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.SaveListener;
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * @author zhangyao
@@ -22,36 +27,108 @@ public class BaseModellmpl implements BaseModel {
 
     BaseView mBaseView;
 
-    LoadingDialog loadingDialog;
 
     public BaseModellmpl(Context context, BaseView baseView) {
         this.mBaseView = baseView;
-        loadingDialog = new LoadingDialog(context, R.style.loadingDialog);
     }
 
     @Override
-    public void saveData(Context context, final BaseBean baseBean) {
+    public void loadGet(Context context, BaseBean baseBean) {
+        HttpManage.getAsyn(baseBean, new MyResultCallback<String>(context, mBaseView, baseBean) {
+            @Override
+            public void onError(Response response, Exception e, int tag) {
+                onErrors(response, e, tag);
+            }
 
-        if (baseBean.isShowLoading()) {
-            if(!loadingDialog.isShowing()){
+            @Override
+            public void onResponse(Object resbase, int tag) {
+                onResponses(resbase, tag);
+            }
+
+            @Override
+            public void onFailure(okhttp3.Call call, IOException e, int tag) {
+                onFailures(call, e, tag);
+            }
+        });
+    }
+
+    @Override
+    public void loadPost(Context context, BaseBean baseBean) {
+        HttpManage.postAsyn(baseBean, new MyResultCallback<String>(context, mBaseView, baseBean) {
+            @Override
+            public void onError(Response response, Exception e, int tag) {
+                onErrors(response, e, tag);
+            }
+
+            @Override
+            public void onResponse(Object resbase, int tag) {
+                onResponses(resbase, tag);
+            }
+
+            @Override
+            public void onFailure(okhttp3.Call call, IOException e, int tag) {
+                onFailures(call, e, tag);
+            }
+        });
+    }
+
+
+    public abstract class MyResultCallback<T> extends ResultCallback {
+
+        BaseView baseView;
+        BaseBean baseBean;
+
+        LoadingDialog loadingDialog;
+
+
+        MyResultCallback(Context mContext, BaseView bs, BaseBean baseBeans) {
+            this.baseView = bs;
+            this.baseBean = baseBeans;
+
+            loadingDialog = new LoadingDialog(mContext, R.style.loadingDialog);
+        }
+
+        @Override
+        public void onBefore(Request request) {
+            super.onBefore(request);
+            if (baseBean.isDoalog()) {
                 loadingDialog.show();
             }
         }
-        baseBean.getBmobObject().save(new SaveListener<String>() {
-            @Override
-            public void done(String s, BmobException e) {
-                if (e == null) {
-                    LogUtils.e("添加数据成功，返回objectId为：" + s);
-                    mBaseView.succeed(s, baseBean.getTag());
-                } else {
-                    LogUtils.e(e.getMessage());
-                    ToastUtils.showShort(e.getMessage());
-                    mBaseView.error(e.getMessage(), baseBean.getTag());
-                }
 
-                loadingDialog.dismiss();
+        @Override
+        public void onAfter() {
+            super.onAfter();
+            if (baseBean.isDoalog()) {
+                if (loadingDialog.isShowing()) {
+                    loadingDialog.dismiss();
+                }
             }
-        });
+        }
+    }
+
+    private void onErrors(Response response, Exception e, int tag) {
+        mBaseView.error(response, tag);
+        mBaseView.responseCode(response.code());
+        try {
+            byte[] responseBytes = response.body().bytes();
+            String responseUrl = new String(responseBytes);
+            CineLog.e("onErrors-" + response.code() + response.message() + "\n" + responseUrl + "\n" + tag);
+            CineToast.showLong(R.string.net_error_failures);
+        } catch (Exception es) {
+            CineToast.showLong(R.string.net_error_failures);
+        }
+    }
+
+    private void onResponses(Object response, int tag) {
+        mBaseView.succeed(response.toString(), tag);
+        CineLog.e(response.toString());
+    }
+
+    private void onFailures(Call call, IOException e, int tag) {
+        mBaseView.error(new Response.Builder(), tag);
+        CineLog.e("onFailures-" + "请求失败" + "-" + tag + "-" + call.request().url());
+        CineToast.showLong(R.string.net_error_failures);
     }
 
 }

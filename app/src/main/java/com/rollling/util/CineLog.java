@@ -12,9 +12,9 @@ import com.rollling.app.MyApplication;
  *     desc  : utils about log
  * </pre>
  */
-public final class LogUtils {
+public final class CineLog {
 
-    private LogUtils() {
+    private CineLog() {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
     }

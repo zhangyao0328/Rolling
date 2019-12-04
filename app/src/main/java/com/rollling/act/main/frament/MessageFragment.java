@@ -1,11 +1,13 @@
 package com.rollling.act.main.frament;
 
+import android.os.Handler;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rollling.R;
 import com.rollling.act.main.frament.adapter.MessageAdapter;
 import com.rollling.base.view.BaseFragment;
-import com.rollling.bean.main.TestBean;
 import com.rollling.bean.msg.MessageBena;
+import com.rollling.view.CustomLoadMoreView;
 import com.rollling.view.RollingRecyclerView;
 
 import java.util.ArrayList;
@@ -22,6 +24,8 @@ public class MessageFragment extends BaseFragment {
 
     @BindView(R.id.rollingRecyclerView)
     RollingRecyclerView rollingRecyclerView;
+
+    boolean isLoadMore = true;
 
     @Override
     public int getLayoutContextView() {
@@ -42,7 +46,6 @@ public class MessageFragment extends BaseFragment {
 
     @Override
     public void firstLoadDate() {
-        getData(new TestBean(), "05f07c7133");
     }
 
     private void initAdapter(){
@@ -54,12 +57,26 @@ public class MessageFragment extends BaseFragment {
             messageBenas.add(messageBena);
         }
 
-        MessageAdapter messageAdapter = new MessageAdapter(R.layout.item_message_list, messageBenas);
+        final MessageAdapter messageAdapter = new MessageAdapter(R.layout.item_message_list, messageBenas);
         messageAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM);
+        final CustomLoadMoreView customLoadMoreView = new CustomLoadMoreView(getContext());
+        messageAdapter.setLoadMoreView(customLoadMoreView);
+        customLoadMoreView.scrollingBackground.start();
         messageAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
+                if(isLoadMore){
+                    customLoadMoreView.scrollingBackground.start();
+                }
 
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            messageAdapter.loadMoreComplete();
+                            isLoadMore = false;
+                        }
+                    }, 2000);
             }
         }, rollingRecyclerView);
 
@@ -70,17 +87,12 @@ public class MessageFragment extends BaseFragment {
     }
 
     @Override
-    public void succeed(String t, int tag) {
+    public void succeed(Object o, int tag) {
 
     }
 
     @Override
-    public void error(String t, int tag) {
-
-    }
-
-    @Override
-    public void responseCode(int code) {
+    public void error(Object o, int tag) {
 
     }
 }

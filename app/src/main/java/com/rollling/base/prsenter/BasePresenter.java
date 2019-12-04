@@ -13,6 +13,8 @@ import com.rollling.bean.BaseBean;
 
 public interface BasePresenter {
 
-    void saveData(Context context, BaseBean baseBean);
+    void getAsync(Context context, BaseBean baseBean);
+
+    void postAsync(Context context, BaseBean baseBean);
 
 }

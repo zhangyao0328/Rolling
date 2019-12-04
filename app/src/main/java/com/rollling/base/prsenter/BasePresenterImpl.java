@@ -25,7 +25,16 @@ public class BasePresenterImpl implements BasePresenter {
     }
 
     @Override
-    public void saveData(Context context, BaseBean baseBean) {
-        baseModel.saveData(context, baseBean);
+    public void getAsync(Context context, BaseBean baseBean) {
+        if (baseView != null) {
+            baseModel.loadGet(context, baseBean);
+        }
+    }
+
+    @Override
+    public void postAsync(Context context, BaseBean baseBean) {
+        if (baseView != null) {
+            baseModel.loadPost(context, baseBean);
+        }
     }
 }

@@ -4,24 +4,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.bigkoo.convenientbanner.ConvenientBanner;
-import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.rollling.R;
 import com.rollling.base.view.BaseFragment;
-import com.rollling.bean.MainBannerBean;
-import com.rollling.holder.BannerImageHolderView;
 import com.rollling.util.ScreenUtils;
-import com.rollling.util.ToastUtils;
 import com.rollling.view.RollingBanner;
 import com.rollling.view.TextViewIcon;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.FindListener;
+import butterknife.OnClick;
 
 /**
  * @author zhangyao
@@ -44,8 +34,6 @@ public class HomeFragment extends BaseFragment {
     TextViewIcon titleBanner;
 
     public static int bannerW, bannerH;
-
-    private ArrayList<MainBannerBean> localImages = new ArrayList<MainBannerBean>();
 
     @Override
     public int getLayoutContextView() {
@@ -74,11 +62,11 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
-    public void succeed(String t, int tag) {
+    public void succeed(Object t, int tag) {
     }
 
     @Override
-    public void error(String t, int tag) {
+    public void error(Object t, int tag) {
 
     }
 
@@ -88,39 +76,33 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void initBanner() {
-        convenientBanner.setPages(new CBViewHolderCreator() {
-            @Override
-            public BannerImageHolderView createHolder(View itemView) {
-                BannerImageHolderView bannerImageHolderView = new BannerImageHolderView(itemView);
-                return bannerImageHolderView;
-            }
-
-            @Override
-            public int getLayoutId() {
-                return R.layout.layout_main_banner;
-            }
-        }, localImages)
-                .setPageIndicator(new int[]{R.drawable.point_round_s, R.drawable.point_round_n})
-                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
-        ;
+//        convenientBanner.setPages(new CBViewHolderCreator() {
+//            @Override
+//            public BannerImageHolderView createHolder(View itemView) {
+//                BannerImageHolderView bannerImageHolderView = new BannerImageHolderView(itemView);
+//                return bannerImageHolderView;
+//            }
+//
+//            @Override
+//            public int getLayoutId() {
+//                return R.layout.layout_main_banner;
+//            }
+//        }, localImages)
+//                .setPageIndicator(new int[]{R.drawable.point_round_s, R.drawable.point_round_n})
+//                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
+//        ;
     }
 
     private void getBannerData() {
-        BmobQuery<MainBannerBean> bmobQuery = new BmobQuery<MainBannerBean>();
 
-        bmobQuery.findObjects(new FindListener<MainBannerBean>() {
-            @Override
-            public void done(List<MainBannerBean> list, BmobException e) {
-                if (e == null) {
-                    for (MainBannerBean bannerBean : list) {
-                        localImages.add(bannerBean);
-                        titleBanner.setTexts(bannerBean.getTitle());
-                    }
-                    initBanner();
-                } else {
-                    ToastUtils.showShort(e.getMessage());
-                }
-            }
-        });
     }
+
+    @OnClick({R.id.tbLeft})
+    public void onClicks(View view){
+        switch (view.getId()){
+            case R.id.tbLeft:
+                break;
+        }
+    }
+
 }

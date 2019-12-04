@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.OnClick;
-import cn.bmob.v3.BmobUser;
 
 /**
  * @author zhangyao
@@ -42,12 +41,12 @@ public class MineFragment extends BaseFragment {
     }
 
     @Override
-    public void succeed(String t, int tag) {
+    public void succeed(Object o, int tag) {
 
     }
 
     @Override
-    public void error(String t, int tag) {
+    public void error(Object o, int tag) {
 
     }
 
@@ -76,10 +75,9 @@ public class MineFragment extends BaseFragment {
         for (String str : list){
             MainBannerBean mainBannerBean = new MainBannerBean();
             mainBannerBean.setUrl(str);
-            mainBannerBean.setUsername(BmobUser.getCurrentUser().getUsername());
+            mainBannerBean.setUsername("hhh");
             mainBannerBean.setHeadUrl("https://images.unsplash.com/photo-1533369257659-6132475f793c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1c926464dc14a8282bdb1dad352424a6&auto=format&fit=crop&w=654&q=80");
             mainBannerBean.setTitle("今日推荐");
-            savaData(mainBannerBean, 0, true );
         }
     }
 

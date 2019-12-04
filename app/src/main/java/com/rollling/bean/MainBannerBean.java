@@ -1,14 +1,12 @@
 package com.rollling.bean;
 
-import cn.bmob.v3.BmobObject;
-
 /**
  * @author zhangyao
  * @date 2018/8/5  01:50
  * @E-mail android_n@163.com
  * 首页-每日推荐banner
  */
-public class MainBannerBean extends BmobObject{
+public class MainBannerBean{
 
     /**
      * banner图片地址

@@ -6,7 +6,6 @@ import android.content.Context;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.rollling.R;
 
-import cn.bmob.v3.Bmob;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
@@ -20,6 +19,8 @@ public class MyApplication extends Application{
 
     public static boolean isDebug = true;
 
+    public static String apiConfig;
+
     public static Context getInstance() {
         return mContext;
     }
@@ -30,12 +31,7 @@ public class MyApplication extends Application{
         mContext = this;
 
         Fresco.initialize(this);
-        initBmob();
         initFont();
-    }
-
-    private void initBmob(){
-        Bmob.initialize(this, "12299351c40d78301ebf709efe6d926e");
     }
 
     private void initFont(){

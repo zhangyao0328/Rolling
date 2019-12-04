@@ -37,7 +37,7 @@ import java.lang.reflect.Field;
  *     desc  : utils about sToast
  * </pre>
  */
-public final class ToastUtils {
+public final class CineToast {
 
     private static final int     COLOR_DEFAULT = 0xFEFFFFFF;
     private static final Handler HANDLER       = new Handler(Looper.getMainLooper());
@@ -51,7 +51,7 @@ public final class ToastUtils {
     private static int sMsgColor    = COLOR_DEFAULT;
     private static int sMsgTextSize = -1;
 
-    private ToastUtils() {
+    private CineToast() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 

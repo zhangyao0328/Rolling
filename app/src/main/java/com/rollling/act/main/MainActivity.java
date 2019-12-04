@@ -5,6 +5,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.MenuItem;
 
 import com.jpeng.jptabbar.JPTabBar;
@@ -14,15 +15,14 @@ import com.rollling.act.main.frament.DiscoverFragment;
 import com.rollling.act.main.frament.HomeFragment;
 import com.rollling.act.main.frament.MessageFragment;
 import com.rollling.act.main.frament.MineFragment;
+import com.rollling.app.MyApplication;
 import com.rollling.base.view.BaseActivity;
-import com.rollling.bean.MyUser;
 import com.rollling.view.RollingViewPage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import cn.bmob.v3.BmobUser;
 
 public class MainActivity extends BaseActivity implements ViewPager.OnPageChangeListener, BottomNavigationView.OnNavigationItemSelectedListener{
 
@@ -46,10 +46,8 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         initNavigationBar();
         initViewPage();
 
-        if(BmobUser.getCurrentUser(MyUser.class) == null){
+        if(TextUtils.isEmpty(MyApplication.apiConfig)){
             openActivity(LoginActivity.class);
-        }else {
-            MyUser myUser = BmobUser.getCurrentUser(MyUser.class);
         }
     }
 
@@ -104,13 +102,14 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         return false;
     }
 
+
     @Override
-    public void succeed(String t, int tag) {
+    public void succeed(Object o, int tag) {
 
     }
 
     @Override
-    public void error(String t, int tag) {
+    public void error(Object o, int tag) {
 
     }
 
@@ -133,4 +132,6 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     public void onPageScrollStateChanged(int state) {
 
     }
+
+
 }

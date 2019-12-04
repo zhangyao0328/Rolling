@@ -41,12 +41,12 @@ public class DiscoverFragment extends BaseTabFragment {
     }
 
     @Override
-    public void succeed(String t, int tag) {
+    public void succeed(Object t, int tag) {
 
     }
 
     @Override
-    public void error(String t, int tag) {
+    public void error(Object t, int tag) {
 
     }
 

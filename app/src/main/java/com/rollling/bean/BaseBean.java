@@ -1,33 +1,138 @@
 package com.rollling.bean;
 
-import cn.bmob.v3.BmobObject;
+import java.util.Map;
 
 /**
  * @author zhangyao
- * @date 2017/11/19
+ * @date 2019-07-28  18:01
  * @E-mail android_n@163.com
  */
-
 public class BaseBean {
+    public BaseBean(){
 
-    public BaseBean(BmobObject object, int tag, boolean isShowLoading){
-        setBmobObject(object);
-        setTag(tag);
-        setShowLoading(isShowLoading);
     }
 
-    BmobObject bmobObject;
+    public BaseBean(String url, String[] key, String[] value, int tag, boolean isDialog){
+        setUrl(url);
+        setKey(key);
+        setValue(value);
+        setTag(tag);
+        setDoalog(isDialog);
+    }
+
+    public BaseBean(String url, Map<String, String> params, int tag, boolean isDialog, String method){
+        setUrl(url);
+        setParams(params);
+        setTag(tag);
+        setDoalog(isDialog);
+        setMethod(method);
+    }
+
+    public BaseBean(String url, Map<String, String> params, int tag, boolean isDialog){
+        setUrl(url);
+        setParams(params);
+        setTag(tag);
+        setDoalog(isDialog);
+    }
+
+    public BaseBean(String url, String strJson, int tag, boolean isDialog, String method){
+        setUrl(url);
+        setStrJson(strJson);
+        setTag(tag);
+        setDoalog(isDialog);
+        setMethod(method);
+    }
+
+    public BaseBean(String url, Map<String, String> params, int tag, boolean isDialog, String method, String fileKey, String fileValue){
+        setUrl(url);
+        setParams(params);
+        setTag(tag);
+        setDoalog(isDialog);
+        setMethod(method);
+        setFileKey(fileKey);
+        setFileValue(fileValue);
+    }
+
+    String url;
+
+    String[] key;
+
+    String[] value;
+
+    String strJson;
 
     int tag;
 
-    boolean isShowLoading;
+    boolean isDoalog;
 
-    public boolean isShowLoading() {
-        return isShowLoading;
+    Map<String, String> params;
+
+    String method;
+
+    /**
+     * 图片文件上传key
+     */
+    String fileKey;
+
+    /**
+     * 图片文件上传value
+     */
+    String fileValue;
+
+    public String getFileValue() {
+        return fileValue;
     }
 
-    public void setShowLoading(boolean showLoading) {
-        isShowLoading = showLoading;
+    public void setFileValue(String fileValue) {
+        this.fileValue = fileValue;
+    }
+
+    public String getFileKey() {
+        return fileKey;
+    }
+
+    public void setFileKey(String fileKey) {
+        this.fileKey = fileKey;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public String getStrJson() {
+        return strJson;
+    }
+
+    public void setStrJson(String strJson) {
+        this.strJson = strJson;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String[] getKey() {
+        return key;
+    }
+
+    public void setKey(String[] key) {
+        this.key = key;
+    }
+
+    public String[] getValue() {
+        return value;
+    }
+
+    public void setValue(String[] value) {
+        this.value = value;
     }
 
     public int getTag() {
@@ -38,11 +143,19 @@ public class BaseBean {
         this.tag = tag;
     }
 
-    public BmobObject getBmobObject() {
-        return bmobObject;
+    public boolean isDoalog() {
+        return isDoalog;
     }
 
-    public void setBmobObject(BmobObject bmobObject) {
-        this.bmobObject = bmobObject;
+    public void setDoalog(boolean doalog) {
+        isDoalog = doalog;
+    }
+
+    public Map<String, String> getParams() {
+        return params;
+    }
+
+    public void setParams(Map<String, String> params) {
+        this.params = params;
     }
 }

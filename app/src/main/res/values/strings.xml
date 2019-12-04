@@ -5,6 +5,10 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_login">Sign in</string>
 
+    <!--public_net_error-->
+    <string name="net_error_request_failed">请求失败，请稍后再试</string>
+    <string name="net_error_failures">网络连接失败，请稍后再试</string>
+
     <!-- 注册登录 -->
     <string name="sign_username">用户名</string>
     <string name="sign_password">密码</string>
