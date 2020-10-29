@@ -56,5 +56,9 @@
         <item name="android:textSize">@dimen/tv_size_20</item>
     </style>
 
+    <style name="tvStyle_14" parent="wrap_content_wrap_content">
+        <item name="android:textSize">@dimen/tv_size_14</item>
+    </style>
+
 
 </resources>

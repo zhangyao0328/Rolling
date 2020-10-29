@@ -2,14 +2,14 @@ package com.rollling.bean.user;
 
 /**
  * @author zhangyao
- * @date 2019-07-30  16:02
+ * @date 2020/10/28  15:27
  * @E-mail android_n@163.com
  */
-public class SignUpBean {
+public class UserLoginPostBean {
 
-    String username;
+    private String username;
 
-    String password;
+    private String password;
 
     public String getUsername() {
         return username;

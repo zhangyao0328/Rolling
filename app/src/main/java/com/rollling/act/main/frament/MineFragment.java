@@ -3,8 +3,6 @@ package com.rollling.act.main.frament;
 import android.view.View;
 
 import com.rollling.R;
-import com.rollling.act.login.LoginActivity;
-import com.rollling.base.view.BaseActivity;
 import com.rollling.base.view.BaseFragment;
 import com.rollling.bean.MainBannerBean;
 
@@ -82,6 +80,5 @@ public class MineFragment extends BaseFragment {
     }
 
     private void addUser(){
-        ((BaseActivity)getActivity()).openActivity(LoginActivity.class);
     }
 }

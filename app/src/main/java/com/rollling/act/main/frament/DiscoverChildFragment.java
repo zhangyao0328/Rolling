@@ -3,8 +3,11 @@ package com.rollling.act.main.frament;
 import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.rollling.R;
+import com.rollling.base.view.BaseActivity;
 import com.rollling.base.view.BaseFragment;
+import com.rollling.net.HttpConfig;
 import com.rollling.util.CineLog;
+import com.rollling.util.LoginUtils;
 import com.rollling.view.RollingRecyclerView;
 
 import butterknife.BindView;
@@ -63,9 +66,15 @@ public class DiscoverChildFragment extends BaseFragment implements SwipeRefreshL
     @Override
     public void onRefresh() {
 
-        String url = "http://192.168.13.29:8080/sd/disk";
+//        String url = HttpConfig.URL_HOST +  "/sd/disk";
+//
+//        getLoad(url, null, null, 1001, false);
 
-        getLoad(url, null, null, 1001, false);
+        LoginUtils.isLogin((BaseActivity) getActivity());
+
+        String url = HttpConfig.URL_HOST +  "/irs/list";
+
+        getLoad(url, null, null, 1002, false);
 
     }
 }

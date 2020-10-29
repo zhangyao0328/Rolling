@@ -14,25 +14,30 @@ public class HttpConfig {
      * true：主站
      * false：测试站
      */
-    static boolean isProduction = false;
+    final static boolean isProduction = false;
+
 
     /**
      * 主域名
      */
-    public static String URL_HOST = isProduction ? "http://192.168.13.29:8080" : "http://192.168.13.29:8080";
+    public final static String URL_HOST = isProduction ? "https://postrock.com.cn" : "http://192.168.124.5:8080";
 
 
-    public static String URL_V1_USER = "/v1/user";
+    public final static String URL_V1_USER = "/v1/user";
 
     /**
      * 用户注册
      */
-    public static String URL_API_CEEATE_USER = URL_HOST + URL_V1_USER;
+    public final static String URL_API_CEEATE_USER = URL_HOST + URL_V1_USER;
 
     /**
      * 用户登录
      */
-    public static String URL_API_LOGIN = URL_HOST + "/login";
+    public final static String URL_API_LOGIN = URL_HOST + "/login";
+    /**
+     * 获取验证码
+     */
+    public final static String URL_API_AUTH_CODE = URL_HOST + "/sms/code";
 
 
 }

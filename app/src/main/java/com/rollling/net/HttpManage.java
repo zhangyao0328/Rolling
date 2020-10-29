@@ -11,7 +11,6 @@ import com.rollling.bean.BaseBean;
 import com.rollling.util.CineLog;
 import com.rollling.util.CineToast;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,10 +18,8 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import okhttp3.Call;
-import okhttp3.ConnectionSpec;
 import okhttp3.FormBody;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -50,44 +47,10 @@ public class HttpManage {
 
     public static String PATCH = "PATCH";
 
-    public static String FILE = "FILE";
-
-    public static String PUT_EDIT = "PUT_EDIT";
-
-//    public static String WX_PAY = "WX_PAY";
-
     public final static int READ_TIMEOUT = 20;
 
 
     HttpManage() {
-        ConnectionSpec connectionSpec = null;
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            connectionSpec = new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS)
-//                    .tlsVersions(TlsVersion.TLS_1_2)
-//                    .cipherSuites(
-//                            CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
-//                            CipherSuite.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
-//                            CipherSuite.TLS_DHE_RSA_WITH_AES_128_GCM_SHA256)
-//                    .build();
-//        } else {
-//            connectionSpec = new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS)
-//                    .tlsVersions(TlsVersion.TLS_1_0)
-//                    .cipherSuites(CipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA)
-//                    .build();
-//        }
-
-//        if (connectionSpec != null) {
-//            okHttpClient = new OkHttpClient.Builder()
-//                    .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
-//                    .connectionSpecs(Collections.singletonList(connectionSpec)).build();
-//            CineLog.e("已设置证书");
-//        } else {
-//            okHttpClient = new OkHttpClient.Builder()
-//                    .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
-//                    .build();
-//            CineLog.e("未设置");
-//        }
 
         okHttpClient = new OkHttpClient.Builder().build();
 
@@ -298,8 +261,7 @@ public class HttpManage {
             }
             FormBody.Builder builder = new FormBody.Builder();
             for (Param param : params) {
-                String key = buildBussiness(param.key);
-                builder.add(key, param.value);
+                builder.add(param.key, param.value);
                 CineLog.e(param.key + "=" + param.value);
             }
             RequestBody requestBody = builder.build();
@@ -321,38 +283,6 @@ public class HttpManage {
                     reqBuilder.url(baseBean.getUrl())
                             .patch(requestBody);
                 }
-                if (baseBean.getMethod().equals(FILE)) {
-                    File file = new File(baseBean.getFileValue());
-                    RequestBody fileBody = RequestBody.create(MediaType.parse("image/*"), file);
-                    MultipartBody.Builder rBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
-                    rBody.addFormDataPart(baseBean.getFileKey(), file.getName() + ".jpg", fileBody);
-                    for (Param param : params) {
-                        String key = buildBussiness(param.key);
-                        rBody.addFormDataPart(key, param.value);
-                    }
-                    reqBuilder.url(baseBean.getUrl())
-                            .post(rBody.build())
-                            .build();
-                }
-                if (baseBean.getMethod().equals(PUT_EDIT)) {
-                    File file = new File(baseBean.getFileValue());
-                    RequestBody fileBody = RequestBody.create(MediaType.parse("image/*"), file);
-                    MultipartBody.Builder rBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
-                    rBody.addFormDataPart(baseBean.getFileKey(), file.getName() + ".jpg", fileBody);
-                    for (Param param : params) {
-                        String key = buildBussiness(param.key);
-                        rBody.addFormDataPart(key, param.value);
-                    }
-                    reqBuilder.url(baseBean.getUrl())
-                            .put(rBody.build())
-                            .build();
-                }
-//                if (baseBean.getMethod().equals(WX_PAY)) {
-//                    RequestBody formBody = RequestBody.create(MediaType.parse("contentType, text/xml"), WXConfig.toXml(baseBean.getParams()));
-//                    reqBuilder.url(baseBean.getUrl())
-//                            .post(formBody)
-//                            .build();
-//                }
             } else {
                 reqBuilder.url(baseBean.getUrl())
                         .post(requestBody);
@@ -361,6 +291,7 @@ public class HttpManage {
             if (getHead().size() > 0) {
                 for (Map.Entry<String, String> entry : getHead().entrySet()) {
                     reqBuilder.addHeader(entry.getKey(), entry.getValue());
+                    CineLog.e(entry.getKey() + "=" + entry.getValue());
                 }
             }
             CineLog.e(baseBean.getUrl());
@@ -392,6 +323,7 @@ public class HttpManage {
             if (getHead().size() > 0) {
                 for (Map.Entry<String, String> entry : getHead().entrySet()) {
                     reqBuilder.addHeader(entry.getKey(), entry.getValue());
+                    CineLog.e(entry.getKey() + "=" + entry.getValue());
                 }
             }
             CineLog.e("json=" + baseBean.getStrJson());
@@ -466,20 +398,13 @@ public class HttpManage {
 
     public static Map<String, String> getHead() {
         Map<String, String> headMap = new HashMap<>();
+        if (MyApplication.userLoginBean != null) {
+            if (!TextUtils.isEmpty(MyApplication.userLoginBean.getData().getToken())) {
+                headMap.put("Authorization", "Bearer " + MyApplication.userLoginBean.getData().getToken());
+            }
+        }
         return headMap;
     }
 
-    /**
-     * 对作品上传-职位特殊处理
-     * 不得已-后续优化
-     *
-     * @param key
-     * @return
-     */
-    private String buildBussiness(String key) {
-        if (key.contains("film[business_ids][")) {
-            key = "film[business_ids][]";
-        }
-        return key;
-    }
+
 }

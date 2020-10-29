@@ -2,13 +2,18 @@ package com.rollling.base.model;
 
 import android.content.Context;
 
+import com.alibaba.fastjson.JSON;
 import com.rollling.R;
+import com.rollling.act.login.LoginActivity;
 import com.rollling.base.view.BaseView;
 import com.rollling.bean.BaseBean;
+import com.rollling.bean.BaseDataBean;
+import com.rollling.err.ErrorCode;
 import com.rollling.net.HttpManage;
 import com.rollling.net.ResultCallback;
 import com.rollling.util.CineLog;
 import com.rollling.util.CineToast;
+import com.rollling.util.OpenAcitivtyUtils;
 import com.rollling.view.LoadingDialog;
 
 import java.io.IOException;
@@ -27,9 +32,11 @@ public class BaseModellmpl implements BaseModel {
 
     BaseView mBaseView;
 
+    Context mContext;
 
     public BaseModellmpl(Context context, BaseView baseView) {
         this.mBaseView = baseView;
+        this.mContext = context;
     }
 
     @Override
@@ -121,6 +128,24 @@ public class BaseModellmpl implements BaseModel {
     }
 
     private void onResponses(Object response, int tag) {
+        if (response != null) {
+            try {
+                BaseDataBean baseDataBean = JSON.parseObject(response.toString(), BaseDataBean.class);
+                if (baseDataBean != null) {
+                    switch (baseDataBean.getCode()) {
+                        case ErrorCode
+                                .ErrTokenInvalid:
+                            CineLog.e("token验证失败");
+                            OpenAcitivtyUtils.openAct(mContext, LoginActivity.class);
+                            break;
+                    }
+                }
+
+                CineLog.e(baseDataBean.toString());
+            } catch (Exception e) {
+                CineLog.e("Json解析失败");
+            }
+        }
         mBaseView.succeed(response.toString(), tag);
         CineLog.e(response.toString());
     }

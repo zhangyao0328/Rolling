@@ -11,15 +11,16 @@ import com.rollling.R;
 import com.rollling.act.main.MainActivity;
 import com.rollling.app.MyApplication;
 import com.rollling.base.view.BaseActivity;
-import com.rollling.bean.user.SignUpBean;
-import com.rollling.bean.user.UserSginInBean;
-import com.rollling.bean.user.UserSginUpBean;
+import com.rollling.bean.user.UserLoginBean;
+import com.rollling.bean.user.UserLoginPostBean;
 import com.rollling.net.HttpConfig;
 import com.rollling.net.HttpManage;
 import com.rollling.util.CineLog;
 import com.rollling.util.CineToast;
 import com.rollling.util.ScreenUtils;
+import com.rollling.util.sp.RollingSp;
 import com.rollling.view.CustomVideoView;
+import com.rollling.view.FrescoImage;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -29,9 +30,9 @@ import butterknife.OnClick;
  */
 public class LoginActivity extends BaseActivity {
 
-    private final int NET_TAG_SIGN_UP = 1001;
-
     private final int NET_TAG_SIGN_IN = 1002;
+
+    private final int NET_TAG_AUTH_CODE = 1003;
 
     @BindView(R.id.userName)
     EditText userName;
@@ -42,6 +43,9 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.customVideoView)
     CustomVideoView customVideoView;
 
+    @BindView(R.id.frescoImageBg)
+    FrescoImage frescoImageBg;
+
     @Override
     public int getLayoutContextView() {
         return R.layout.activity_login;
@@ -51,37 +55,30 @@ public class LoginActivity extends BaseActivity {
     public void init() {
         ScreenUtils.setFullScreen(this);
 //        initVideo();
+
+        setView();
     }
 
     @Override
     public void succeed(Object o, int tag) {
         switch (tag) {
-            case NET_TAG_SIGN_UP:
-                UserSginUpBean userResultBean = JSON.parseObject(o.toString(), UserSginUpBean.class);
-                switch (userResultBean.getCode()) {
-                    case 0:
-                        CineLog.e(" 创建用户成功");
-                        signIn();
-                        break;
-                    default:
-                        CineLog.e(userResultBean.getMessage());
-                        CineToast.showShort(userResultBean.getMessage());
-                        break;
-                }
-                break;
             case NET_TAG_SIGN_IN:
-                UserSginInBean userLoginBean = JSON.parseObject(o.toString(), UserSginInBean.class);
+                UserLoginBean userLoginBean = JSON.parseObject(o.toString(), UserLoginBean.class);
                 switch (userLoginBean.getCode()) {
                     case 0:
-                        MyApplication.apiConfig = userLoginBean.getData().getToken();
+                        MyApplication.userLoginBean = userLoginBean;
+                        RollingSp.putData(this, RollingSp.ROLLING_USER_LOGIN_DATA, o.toString());
                         CineLog.e(" 用户登录成功");
                         openActivity(MainActivity.class);
                         break;
                     default:
-                        CineLog.e(userLoginBean.getMessage());
-                        CineToast.showShort(userLoginBean.getMessage());
+                        if (!TextUtils.isEmpty(userLoginBean.getMessage())) {
+                            CineToast.showShort(userLoginBean.getMessage());
+                        }
                         break;
                 }
+                break;
+            case NET_TAG_AUTH_CODE:
                 break;
         }
     }
@@ -91,14 +88,17 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.btSignIn, R.id.btSignUp})
+    @OnClick({R.id.btSignIn, R.id.btGetAuthCode, R.id.tvBack})
     public void onClicks(View view) {
         switch (view.getId()) {
             case R.id.btSignIn:
                 signIn();
                 break;
-            case R.id.btSignUp:
-                signUp();
+            case R.id.btGetAuthCode:
+                getAuthCode();
+                break;
+            case R.id.tvBack:
+                finish();
                 break;
         }
     }
@@ -107,35 +107,41 @@ public class LoginActivity extends BaseActivity {
      * 登录
      */
     private void signIn() {
-        if (!isUsernamPsdIsEmpty()) {
-            SignUpBean singUpBean = new SignUpBean();
-            singUpBean.setUsername(userName.getText().toString().trim());
-            singUpBean.setPassword(password.getText().toString().trim());
-            String json = JSON.toJSONString(singUpBean);
+        if (!isUsernamPsdIsEmpty(false)) {
+            UserLoginPostBean userLoginPostBean = new UserLoginPostBean();
+            userLoginPostBean.setUsername(userName.getText().toString().trim());
+            userLoginPostBean.setPassword(password.getText().toString().trim());
+            String json = JSON.toJSONString(userLoginPostBean);
             postLoad(HttpConfig.URL_API_LOGIN, json, NET_TAG_SIGN_IN, true, HttpManage.POST);
         }
     }
 
+
     /**
-     * 注册
+     * 获取验证码
      */
-    public void signUp() {
+    public void getAuthCode() {
 
-        if (!isUsernamPsdIsEmpty()) {
-            SignUpBean singUpBean = new SignUpBean();
-            singUpBean.setUsername(userName.getText().toString().trim());
-            singUpBean.setPassword(password.getText().toString().trim());
-            String json = JSON.toJSONString(singUpBean);
-            postLoad(HttpConfig.URL_API_CEEATE_USER, json, NET_TAG_SIGN_UP, true, HttpManage.POST);
+        if (!isUsernamPsdIsEmpty(true)) {
+            UserLoginPostBean userLoginPostBean = new UserLoginPostBean();
+            userLoginPostBean.setUsername(userName.getText().toString().trim());
+            String json = JSON.toJSONString(userLoginPostBean);
+            postLoad(HttpConfig.URL_API_AUTH_CODE, json, NET_TAG_AUTH_CODE, true, HttpManage.POST);
         }
-
     }
 
-    private boolean isUsernamPsdIsEmpty() {
+    private boolean isUsernamPsdIsEmpty(boolean isGetAuthCode) {
+
+
         if (TextUtils.isEmpty(userName.getText().toString().trim())) {
             CineToast.showShort(R.string.sign_username_empty);
             return true;
         }
+
+        if(isGetAuthCode){
+            return false;
+        }
+
         if (TextUtils.isEmpty(password.getText().toString().trim())) {
             CineToast.showShort(R.string.sign_password_empty);
             return true;
@@ -159,7 +165,7 @@ public class LoginActivity extends BaseActivity {
     //返回重启加载
     @Override
     protected void onRestart() {
-        initVideo();
+//        initVideo();
         super.onRestart();
     }
 
@@ -168,6 +174,10 @@ public class LoginActivity extends BaseActivity {
     protected void onStop() {
         customVideoView.stopPlayback();
         super.onStop();
+    }
+
+    private void setView(){
+        frescoImageBg.setImageURL("https://images.unsplash.com/photo-1603880007902-ec1a7bc05958?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60");
     }
 }
 

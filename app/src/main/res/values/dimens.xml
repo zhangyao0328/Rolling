@@ -16,5 +16,6 @@
 
     <dimen name="tv_size_20">20sp</dimen>
     <dimen name="tv_size_12">12sp</dimen>
+    <dimen name="tv_size_14">14sp</dimen>
 
 </resources>

@@ -12,8 +12,13 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:visibility="gone" />
 
+    <com.rollling.view.FrescoImage
+        android:id="@+id/frescoImageBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.rollling.view.FrescoImage>
 
     <ScrollView
         android:id="@+id/login_form"
@@ -24,64 +29,90 @@
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:background="@color/colorFFFFFF"
             android:orientation="vertical"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingBottom="@dimen/activity_vertical_margin">
 
-            <EditText
-                android:id="@+id/userName"
-                android:layout_width="match_parent"
+
+            <ImageView
+                android:id="@+id/tvBack"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/sign_username"
-                android:inputType="phone"
-                android:maxLines="1"
-                android:singleLine="true" />
+                android:layout_marginTop="50dp"
+                android:src="@mipmap/icon_head_back_white_yy"></ImageView>
+
+            <com.rollling.view.TextViewIcon
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="手机号登录"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/tv_size_20"></com.rollling.view.TextViewIcon>
 
 
-            <EditText
-                android:id="@+id/password"
-                android:layout_width="match_parent"
+            <com.rollling.view.TextViewIcon
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/sign_password"
-                android:imeActionId="6"
-                android:imeActionLabel="@string/sign_password_6"
-                android:imeOptions="actionUnspecified"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:singleLine="true" />
+                android:layout_marginTop="5dp"
+                android:text="初次使用将自动注册"></com.rollling.view.TextViewIcon>
+
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
 
-                <Button
-                    android:id="@+id/btSignIn"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="match_parent"
+                <com.rollling.view.TextViewIcon
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_weight="1"
-                    android:text="@string/sign_in"
-                    android:textStyle="bold" />
+                    android:text="+86"></com.rollling.view.TextViewIcon>
 
-                <Button
-                    android:id="@+id/btSignUp"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="match_parent"
+                <EditText
+                    android:id="@+id/userName"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_weight="1"
-                    android:text="@string/sign_up"
-                    android:textStyle="bold" />
+                    android:hint="@string/sign_username"
+                    ></EditText>
 
             </LinearLayout>
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/sign_username"
+                    ></EditText>
+
+                <com.rollling.view.TextViewIcon
+                    android:id="@+id/btGetAuthCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="发送验证码"></com.rollling.view.TextViewIcon>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btSignIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="登录"
+                ></Button>
+
         </LinearLayout>
     </ScrollView>
+
+
+
+
+
 </RelativeLayout>

@@ -5,7 +5,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.text.TextUtils;
 import android.view.MenuItem;
 
 import com.jpeng.jptabbar.JPTabBar;
@@ -15,8 +14,8 @@ import com.rollling.act.main.frament.DiscoverFragment;
 import com.rollling.act.main.frament.HomeFragment;
 import com.rollling.act.main.frament.MessageFragment;
 import com.rollling.act.main.frament.MineFragment;
-import com.rollling.app.MyApplication;
 import com.rollling.base.view.BaseActivity;
+import com.rollling.util.CineLog;
 import com.rollling.view.RollingViewPage;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity implements ViewPager.OnPageChangeListener, BottomNavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends BaseActivity implements ViewPager.OnPageChangeListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.viewPager)
     RollingViewPage viewPager;
@@ -46,9 +45,13 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         initNavigationBar();
         initViewPage();
 
-        if(TextUtils.isEmpty(MyApplication.apiConfig)){
-            openActivity(LoginActivity.class);
-        }
+//        if(!LoginUtils.isLogin(this)){
+        openActivity(LoginActivity.class);
+//        }
+//
+//        String url = HttpConfig.URL_HOST +  "/irs/list";
+//
+//        getLoad(url, null, null, 1002, false);
     }
 
     private void initNavigationBar() {
@@ -60,7 +63,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         navigation.setContainer(viewPager);
     }
 
-    private void initViewPage(){
+    private void initViewPage() {
 
         fragmentList = new ArrayList<>();
         fragmentList.add(new HomeFragment());
@@ -86,7 +89,6 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         viewPager.setOffscreenPageLimit(fragmentList.size());
 
 
-
     }
 
     @Override
@@ -106,6 +108,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     @Override
     public void succeed(Object o, int tag) {
 
+        CineLog.e(this.getClass().getName());
     }
 
     @Override

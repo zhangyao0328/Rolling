@@ -47,6 +47,7 @@
             android:name=".act.login.LoginActivity"
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait"
+            android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
             ></activity>
     </application>

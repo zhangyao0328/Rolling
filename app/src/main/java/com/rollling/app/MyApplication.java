@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.rollling.R;
+import com.rollling.bean.user.UserLoginBean;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -13,28 +14,28 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
  * @date 2018/7/29  22:10
  * @E-mail android_n@163.com
  */
-public class MyApplication extends Application{
+public class MyApplication extends Application {
 
-    private static MyApplication mContext;
+    private static MyApplication application;
 
     public static boolean isDebug = true;
 
-    public static String apiConfig;
+    public static UserLoginBean userLoginBean;
 
     public static Context getInstance() {
-        return mContext;
+        return application;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        mContext = this;
+        application = this;
 
         Fresco.initialize(this);
         initFont();
     }
 
-    private void initFont(){
+    private void initFont() {
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                 .setDefaultFontPath("fonts/Roboto-RobotoRegular.ttf")
                 .setFontAttrId(R.attr.fontPath)
