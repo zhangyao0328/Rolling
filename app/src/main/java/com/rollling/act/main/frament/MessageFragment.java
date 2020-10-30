@@ -1,13 +1,8 @@
 package com.rollling.act.main.frament;
 
-import android.os.Handler;
-
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rollling.R;
-import com.rollling.act.main.frament.adapter.MessageAdapter;
 import com.rollling.base.view.BaseFragment;
 import com.rollling.bean.msg.MessageBena;
-import com.rollling.view.CustomLoadMoreView;
 import com.rollling.view.RollingRecyclerView;
 
 import java.util.ArrayList;
@@ -48,41 +43,41 @@ public class MessageFragment extends BaseFragment {
     public void firstLoadDate() {
     }
 
-    private void initAdapter(){
+    private void initAdapter() {
 
         List<MessageBena> messageBenas = new ArrayList<>();
-        for(int i = 0 ; i < 100; i ++){
+        for (int i = 0; i < 100; i++) {
             MessageBena messageBena = new MessageBena();
             messageBena.setUserName(" yao " + i);
             messageBenas.add(messageBena);
         }
 
-        final MessageAdapter messageAdapter = new MessageAdapter(R.layout.item_message_list, messageBenas);
-        messageAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM);
-        final CustomLoadMoreView customLoadMoreView = new CustomLoadMoreView(getContext());
-        messageAdapter.setLoadMoreView(customLoadMoreView);
-        customLoadMoreView.scrollingBackground.start();
-        messageAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-            @Override
-            public void onLoadMoreRequested() {
-                if(isLoadMore){
-                    customLoadMoreView.scrollingBackground.start();
-                }
-
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            messageAdapter.loadMoreComplete();
-                            isLoadMore = false;
-                        }
-                    }, 2000);
-            }
-        }, rollingRecyclerView);
-
-
-
-        rollingRecyclerView.setAdapter(messageAdapter);
+//        final MessageAdapter messageAdapter = new MessageAdapter(R.layout.item_message_list, messageBenas);
+//        messageAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM);
+//        final CustomLoadMoreView customLoadMoreView = new CustomLoadMoreView(getContext());
+//        messageAdapter.setLoadMoreView(customLoadMoreView);
+//        customLoadMoreView.scrollingBackground.start();
+//        messageAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+//            @Override
+//            public void onLoadMoreRequested() {
+//                if(isLoadMore){
+//                    customLoadMoreView.scrollingBackground.start();
+//                }
+//
+//
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            messageAdapter.loadMoreComplete();
+//                            isLoadMore = false;
+//                        }
+//                    }, 2000);
+//            }
+//        }, rollingRecyclerView);
+//
+//
+//
+//        rollingRecyclerView.setAdapter(messageAdapter);
 
     }
 

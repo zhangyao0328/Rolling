@@ -2,6 +2,7 @@ package com.rollling.act.login;
 
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -20,7 +21,11 @@ import com.rollling.util.CineToast;
 import com.rollling.util.ScreenUtils;
 import com.rollling.util.sp.RollingSp;
 import com.rollling.view.CustomVideoView;
-import com.rollling.view.FrescoImage;
+import com.rollling.view.RollingAutoPollRecyclerView;
+import com.rollling.view.adapter.AutoPollAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -43,8 +48,8 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.customVideoView)
     CustomVideoView customVideoView;
 
-    @BindView(R.id.frescoImageBg)
-    FrescoImage frescoImageBg;
+    @BindView(R.id.rollingAutoPollRecyclerView)
+    RollingAutoPollRecyclerView rollingAutoPollRecyclerView;
 
     @Override
     public int getLayoutContextView() {
@@ -138,7 +143,7 @@ public class LoginActivity extends BaseActivity {
             return true;
         }
 
-        if(isGetAuthCode){
+        if (isGetAuthCode) {
             return false;
         }
 
@@ -176,8 +181,24 @@ public class LoginActivity extends BaseActivity {
         super.onStop();
     }
 
-    private void setView(){
-        frescoImageBg.setImageURL("https://images.unsplash.com/photo-1603880007902-ec1a7bc05958?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60");
+    private void setView() {
+        List<String> list = new ArrayList<>();
+        list.add("https://images.unsplash.com/photo-1484250214257-26317e1e0f1e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
+        list.add("https://images.unsplash.com/photo-1530143311094-34d807799e8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjI2Mjc0fQ&auto=format&fit=crop&w=1350&q=80");
+        list.add("https://images.unsplash.com/photo-1456613820599-bfe244172af5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1506&q=80");
+        list.add("https://images.unsplash.com/photo-1598702631024-b282c0fd96b2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80");
+        list.add("https://images.unsplash.com/photo-1533240332313-0db49b459ad6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80");
+
+        AutoPollAdapter adapter = new AutoPollAdapter(this, list);
+        rollingAutoPollRecyclerView.setLayoutManager(
+                new LinearLayoutManager(
+                        this,
+                        //设置LinearLayoutManager.HORIZONTAL  则水平滚动
+                        LinearLayoutManager.VERTICAL, false));
+
+
+        rollingAutoPollRecyclerView.setAdapter(adapter);
+        rollingAutoPollRecyclerView.start();
     }
 }
 
