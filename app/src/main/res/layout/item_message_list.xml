@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.rollling.view.TextViewIcon
+    <com.rolling.view.TextViewIcon
         android:id="@+id/userName"
         style="@style/tvStyle1"
         android:textColor="@color/colorPrimaryDark"

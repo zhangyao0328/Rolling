@@ -13,17 +13,17 @@
     <!--        android:layout_height="wrap_content">-->
 
 
-    <com.rollling.view.RollingAutoPollRecyclerView
+    <com.rolling.view.RollingAutoPollRecyclerView
         android:id="@+id/rollingAutoPollRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        ></com.rollling.view.RollingAutoPollRecyclerView>
+        ></com.rolling.view.RollingAutoPollRecyclerView>
 
-    <com.rollling.view.FrescoImage
+    <com.rolling.view.FrescoImage
         android:id="@+id/frescoImageBg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:overlayImage="@mipmap/login_bg_m"></com.rollling.view.FrescoImage>
+        app:overlayImage="@mipmap/login_bg_m"></com.rolling.view.FrescoImage>
 
     <LinearLayout
         android:id="@+id/email_login_form"
@@ -43,18 +43,18 @@
             android:src="@mipmap/icon_head_back_white_yy"></ImageView>
 
 
-        <com.rollling.view.TextViewIcon
+        <com.rolling.view.TextViewIcon
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="手机号登录"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/tv_size_20"></com.rollling.view.TextViewIcon>
+            android:textSize="@dimen/tv_size_20"></com.rolling.view.TextViewIcon>
 
-        <com.rollling.view.TextViewIcon
+        <com.rolling.view.TextViewIcon
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="初次使用将自动注册"></com.rollling.view.TextViewIcon>
+            android:text="初次使用将自动注册"></com.rolling.view.TextViewIcon>
 
 
         <LinearLayout
@@ -62,10 +62,10 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <com.rollling.view.TextViewIcon
+            <com.rolling.view.TextViewIcon
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+86"></com.rollling.view.TextViewIcon>
+                android:text="+86"></com.rolling.view.TextViewIcon>
 
             <EditText
                 android:id="@+id/userName"
@@ -97,11 +97,11 @@
                 android:background="@null"
                 ></EditText>
 
-            <com.rollling.view.TextViewIcon
+            <com.rolling.view.TextViewIcon
                 android:id="@+id/btGetAuthCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="发送验证码"></com.rollling.view.TextViewIcon>
+                android:text="发送验证码"></com.rolling.view.TextViewIcon>
 
         </LinearLayout>
 
@@ -113,7 +113,7 @@
 
     </LinearLayout>
 
-    <com.rollling.view.CustomVideoView
+    <com.rolling.view.CustomVideoView
         android:id="@+id/customVideoView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

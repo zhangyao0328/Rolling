@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.rollling.view.FrescoImage
+    <com.rolling.view.FrescoImage
         android:id="@+id/imageBanner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         fresco:placeholderImage="@color/colorPrimaryDark"
         />
 
-    <com.rollling.view.Black2White2BlackGradint
+    <com.rolling.view.Black2White2BlackGradint
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -25,9 +25,9 @@
 
         <include layout="@layout/fresco_image_36"></include>
 
-        <com.rollling.view.TextViewIcon
+        <com.rolling.view.TextViewIcon
             android:id="@+id/userName"
-            style="@style/styleUserName"
+            style="@style/tvStyle_14"
             android:layout_margin="@dimen/view_margin"
             />
 

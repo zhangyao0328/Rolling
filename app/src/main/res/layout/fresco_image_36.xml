@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.rollling.view.FrescoImage xmlns:android="http://schemas.android.com/apk/res/android"
+<com.rolling.view.FrescoImage xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:id="@+id/frescoImage"
     android:layout_width="@dimen/freso_img_36"
@@ -7,4 +7,4 @@
     fresco:viewAspectRatio="1"
     >
 
-</com.rollling.view.FrescoImage>
+</com.rolling.view.FrescoImage>

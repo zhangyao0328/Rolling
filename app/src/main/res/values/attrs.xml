@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="layout_search">
+        <attr name="ed_hint" format="string"></attr>
+    </declare-styleable>
+
+</resources>

@@ -23,7 +23,7 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             />
 
-        <com.rollling.view.TextViewIcon
+        <com.rolling.view.TextViewIcon
             style="@style/tvStyle1"
             android:layout_width="wrap_content"
             android:gravity="center"

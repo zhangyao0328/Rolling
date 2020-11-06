@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".act.location.LocationActivity">
+    
+    <com.rolling.view.search.SearchLayout
+        android:id="@+id/searchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ed_hint="@string/location_search_city"
+        ></com.rolling.view.search.SearchLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutGpsCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_below="@+id/searchLayout"
+        >
+
+        <com.rolling.view.TextViewIcon
+            android:id="@+id/tvGpsCity"
+            style="@style/tvStyle_14"></com.rolling.view.TextViewIcon>
+
+        <com.rolling.view.TextViewIcon
+            style="@style/tvStyle_14"
+            android:layout_marginLeft="10dp"
+            android:text="@string/location_gps_city"></com.rolling.view.TextViewIcon>
+
+    </LinearLayout>
+
+    <com.rolling.view.RollingRecyclerView
+        android:id="@+id/rollingRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layoutGpsCity"></com.rolling.view.RollingRecyclerView>
+
+    <com.bigkoo.quicksidebar.QuickSideBarTipsView
+        android:id="@+id/quickSideBarTipsView"
+        android:layout_width="@dimen/height_quicksidebartips"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/quickSideBarView"
+        android:gravity="center_vertical"
+        app:sidebarBackgroundColor="@color/colorPrimary"
+        app:sidebarTextSize="@dimen/textSize_quicksidebartips" />
+
+    <com.bigkoo.quicksidebar.QuickSideBarView
+        android:id="@id/quickSideBarView"
+        android:layout_width="20dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        app:sidebarItemHeight="@dimen/height_quicksidebaritem"
+        app:sidebarTextColor="@android:color/black"
+        app:sidebarTextColorChoose="@color/colorPrimary"
+        app:sidebarTextSize="@dimen/textSize_quicksidebar"
+        app:sidebarTextSizeChoose="@dimen/textSize_quicksidebar_choose"
+        android:layout_below="@+id/layoutGpsCity"
+        />
+    
+
+
+</RelativeLayout>

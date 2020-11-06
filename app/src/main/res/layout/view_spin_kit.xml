@@ -14,9 +14,9 @@
         android:layout_height="wrap_content"
         />
 
-    <com.rollling.view.TextViewIcon
+    <com.rolling.view.TextViewIcon
         android:id="@+id/tvMessage"
-        style="@style/styleUserName"
+        style="@style/tvStyle_14"
         android:layout_marginTop="10dp"
         />
 </LinearLayout>
