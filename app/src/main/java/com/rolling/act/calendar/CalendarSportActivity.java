@@ -169,8 +169,6 @@ public class CalendarSportActivity extends BaseActivity implements CalendarView.
                     mTextYear.setVisibility(View.GONE);
                     mTextMonthDay.setText(String.valueOf(mYear));
                 }
-
-
                 break;
         }
     }
@@ -178,5 +176,18 @@ public class CalendarSportActivity extends BaseActivity implements CalendarView.
     @Override
     public void onYearChange(int year) {
         mTextMonthDay.setText(String.valueOf(year));
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mCalendarView.isYearSelectLayoutVisible()) {
+            mCalendarView.closeYearSelectLayout();
+            mTextLunar.setVisibility(View.VISIBLE);
+            mTextYear.setVisibility(View.VISIBLE);
+            mTextMonthDay.setText(mCalendarView.getCurMonth() + "月" + mCalendarView.getCurDay() + "日");
+            mTextYear.setText(String.valueOf(mYear));
+            return;
+        }
+        super.onBackPressed();
     }
 }

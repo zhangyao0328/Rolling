@@ -5,12 +5,12 @@
     android:layout_height="wrap_content"
     >
 
-    <android.support.v7.widget.SearchView
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/edSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/tvSearchCancel"
-        ></android.support.v7.widget.SearchView>
+        ></androidx.appcompat.widget.SearchView>
 
     <com.rolling.view.TextViewIcon
         android:id="@+id/tvSearchCancel"

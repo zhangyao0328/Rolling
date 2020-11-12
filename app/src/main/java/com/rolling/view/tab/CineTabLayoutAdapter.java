@@ -2,9 +2,9 @@ package com.rolling.view.tab;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.RecyclerView;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;

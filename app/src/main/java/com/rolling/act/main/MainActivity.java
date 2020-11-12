@@ -1,12 +1,13 @@
 package com.rolling.act.main;
 
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentPagerAdapter;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jpeng.jptabbar.JPTabBar;
 import com.rolling.R;
 import com.rolling.act.login.LoginActivity;
@@ -148,13 +149,14 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     public void onBackPressed() {
-        EventFragment eventFragment = (EventFragment) homeFragment.fragmentList.get(0);
-        if(eventFragment.rootFilterContent.getVisibility() == View.VISIBLE){
-            eventFragment.rootFilterContent.setVisibility(View.GONE);
-            rootContentBg.setVisibility(View.GONE);
-        }else {
-            super.onBackPressed();
+        if (homeFragment.fragmentList.size() > 0) {
+            EventFragment eventFragment = (EventFragment) homeFragment.fragmentList.get(0);
+            if (eventFragment.rootFilterContent.getVisibility() == View.VISIBLE) {
+                eventFragment.rootFilterContent.setVisibility(View.GONE);
+                rootContentBg.setVisibility(View.GONE);
+                return;
+            }
         }
-
+        super.onBackPressed();
     }
 }

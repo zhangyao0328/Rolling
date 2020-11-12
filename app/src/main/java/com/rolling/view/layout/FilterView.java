@@ -82,9 +82,11 @@ public class FilterView extends RelativeLayout {
         if (eventFragment != null) {
             switch (view.getId()) {
                 case R.id.tvAllType:
+                    isAppBarLayout();
                     eventFragment.initFilterView(0);
                     break;
                 case R.id.tvSort:
+                    isAppBarLayout();
                     eventFragment.initFilterView(1);
                     break;
                 case R.id.tvCalendar:
@@ -92,6 +94,11 @@ public class FilterView extends RelativeLayout {
                     break;
             }
         }
+    }
 
+    private void isAppBarLayout(){
+        if (eventFragment.appBarLayout.isEnabled()) {
+            eventFragment.appBarLayout.setExpanded(false);
+        }
     }
 }

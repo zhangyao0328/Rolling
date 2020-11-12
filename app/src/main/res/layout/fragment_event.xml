@@ -1,43 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         >
 
-        <LinearLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
 
             <com.rolling.view.TextViewIcon
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/home_search_hint"
                 android:padding="5dp"
-                android:background="@color/color999999"></com.rolling.view.TextViewIcon>
+                android:background="@color/color999999" />
 
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="#5FF"
-                android:minHeight="50dp" />
-        </LinearLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
 
         <com.rolling.view.layout.FilterView
             android:id="@+id/filterView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></com.rolling.view.layout.FilterView>
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -56,6 +57,6 @@
             android:layout_height="match_parent"
             android:layout="@layout/layout_home_filter_content" />
     </RelativeLayout>
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 

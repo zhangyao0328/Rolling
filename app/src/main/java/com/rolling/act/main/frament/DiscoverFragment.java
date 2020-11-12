@@ -1,6 +1,6 @@
 package com.rolling.act.main.frament;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import com.rolling.R;
 import com.rolling.base.view.BaseTabFragment;

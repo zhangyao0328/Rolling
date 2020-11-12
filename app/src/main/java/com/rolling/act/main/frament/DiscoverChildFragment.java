@@ -1,6 +1,6 @@
 package com.rolling.act.main.frament;
 
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.rolling.R;
 import com.rolling.base.view.BaseActivity;

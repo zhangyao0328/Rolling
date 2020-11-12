@@ -2,7 +2,7 @@ package com.rolling.view.search;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v7.widget.SearchView;
+import androidx.appcompat.widget.SearchView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;

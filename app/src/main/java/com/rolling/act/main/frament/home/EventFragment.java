@@ -2,10 +2,15 @@ package com.rolling.act.main.frament.home;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.RelativeLayout;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.alibaba.fastjson.JSON;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.rolling.R;
 import com.rolling.act.main.MainActivity;
 import com.rolling.act.main.frament.home.adapter.holder.SportFilterAdapter;
@@ -14,8 +19,15 @@ import com.rolling.bean.home.HomeDataBean;
 import com.rolling.bean.tab.TopTabBean;
 import com.rolling.bean.tab.TopTabListBean;
 import com.rolling.net.HttpConfig;
+import com.rolling.util.AppUtils;
 import com.rolling.view.RlRecyclerView;
+import com.rolling.view.banner.Config;
+import com.rolling.view.banner.ImageAdapter;
 import com.rolling.view.layout.FilterView;
+import com.youth.banner.Banner;
+import com.youth.banner.config.IndicatorConfig;
+import com.youth.banner.indicator.RectangleIndicator;
+import com.youth.banner.util.BannerUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +55,15 @@ public class EventFragment extends BaseFragment {
     @BindView(R.id.filterView)
     FilterView filterView;
 
+    @BindView(R.id.appBarLayout)
+    public AppBarLayout appBarLayout;
+
+    @BindView(R.id.collapsingToolbarLayout)
+    public CollapsingToolbarLayout collapsingToolbarLayout;
+
+    @BindView(R.id.banner)
+    Banner banner;
+
     ViewStub viewStubFilter;
 
     RlRecyclerView recyclerViewFilter;
@@ -61,6 +82,8 @@ public class EventFragment extends BaseFragment {
 
     TopTabListBean sportTypeBean;
 
+    HomeDataBean homeDataBean;
+
     @Override
     public int getLayoutContextView() {
         return R.layout.fragment_event;
@@ -78,6 +101,16 @@ public class EventFragment extends BaseFragment {
         recyclerView.setAdapter(adapter);
 
         filterView.setData(this);
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+//                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+//                int position = layoutManager.findFirstVisibleItemPosition();
+//                CineLog.d("位置信息"+position);
+            }
+        });
     }
 
 
@@ -96,11 +129,11 @@ public class EventFragment extends BaseFragment {
     public void succeed(Object o, int tag) {
         switch (tag) {
             case NET_GET_IRS_DATA:
-                HomeDataBean homeDataBean = JSON.parseObject(o.toString(), HomeDataBean.class);
+                homeDataBean = JSON.parseObject(o.toString(), HomeDataBean.class);
                 if (adapter.getItemCount() > 0) {
                     adapter.clearItems();
                 }
-                buildData(homeDataBean);
+                buildData();
                 break;
             case NET_GET_SPORT_TYPE:
                 sportTypeBean = JSON.parseObject(o.toString(), TopTabListBean.class);
@@ -122,8 +155,10 @@ public class EventFragment extends BaseFragment {
         getLoad(HttpConfig.URL_API_SPORT_TYPE, null, null, NET_GET_SPORT_TYPE, false);
     }
 
-    private void buildData(HomeDataBean homeDataBean) {
-        adapter.addItems(homeDataBean.getData().getUserList());
+    private void buildData() {
+        adapter.addItems(this.homeDataBean.getData().getUserList());
+
+        initBanner();
     }
 
     public void initFilterView(int id) {
@@ -188,6 +223,44 @@ public class EventFragment extends BaseFragment {
     public void dismissFilter() {
         rootFilterContent.setVisibility(View.GONE);
         ((MainActivity) getActivity()).rootContentBg.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        banner.start();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        banner.stop();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        banner.destroy();
+    }
+
+    private void initBanner() {
+
+        ImageAdapter imageAdapter = new ImageAdapter(homeDataBean.getData().getUserList().subList(0, 4));
+
+        banner.setAdapter(imageAdapter);
+        banner.setLoopTime(Config.LOOP_TIME);
+        banner.setScrollTime(Config.SCROLL_TIME);
+        banner.setIndicator(new RectangleIndicator(getContext()));
+        banner.setIndicatorGravity(IndicatorConfig.Direction.RIGHT);
+        banner.setIndicatorSelectedWidth((int) BannerUtils.dp2px(12));
+        banner.setIndicatorSpace((int) BannerUtils.dp2px(4));
+        banner.setIndicatorRadius(0);
+
+        ViewGroup.LayoutParams layoutParams = banner.getLayoutParams();
+        int w = AppUtils.getScreenWidth(getContext());
+        layoutParams.width = w;
+        layoutParams.height = w / 4 * 3;
+        banner.setLayoutParams(layoutParams);
     }
 
 

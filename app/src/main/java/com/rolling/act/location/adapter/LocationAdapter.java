@@ -1,6 +1,6 @@
 package com.rolling.act.location.adapter;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.rolling.bean.location.CityBean;
 
