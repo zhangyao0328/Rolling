@@ -3,7 +3,7 @@ package com.rolling.act.main.frament;
 import com.rolling.R;
 import com.rolling.base.view.BaseFragment;
 import com.rolling.bean.msg.MessageBena;
-import com.rolling.view.RollingRecyclerView;
+import com.rolling.view.RlRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +17,8 @@ import butterknife.BindView;
  */
 public class MessageFragment extends BaseFragment {
 
-    @BindView(R.id.rollingRecyclerView)
-    RollingRecyclerView rollingRecyclerView;
+    @BindView(R.id.rlRecyclerView)
+    RlRecyclerView rlRecyclerView;
 
     boolean isLoadMore = true;
 
@@ -29,7 +29,7 @@ public class MessageFragment extends BaseFragment {
 
     @Override
     public void init() {
-        rollingRecyclerView.initCineRecyclerViewNoDecoration(getContext());
+        rlRecyclerView.initCineRecyclerViewNoDecoration(getContext());
 
         initAdapter();
     }

@@ -22,7 +22,7 @@ import com.rolling.bean.location.CityBeanResponse;
 import com.rolling.net.HttpConfig;
 import com.rolling.util.CineLog;
 import com.rolling.util.CineToast;
-import com.rolling.view.RollingRecyclerView;
+import com.rolling.view.RlRecyclerView;
 import com.rolling.view.TextViewIcon;
 import com.rolling.view.adapter.OnItemClickListener;
 import com.rolling.view.search.SearchLayout;
@@ -39,8 +39,8 @@ public class LocationActivity extends BaseActivity implements AMapLocationListen
 
     private final int NET_GET_CITY = 1001;
 
-    @BindView(R.id.rollingRecyclerView)
-    RollingRecyclerView recyclerView;
+    @BindView(R.id.rlRecyclerView)
+    RlRecyclerView recyclerView;
 
     @BindView(R.id.quickSideBarView)
     QuickSideBarView quickSideBarView;

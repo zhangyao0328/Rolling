@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    >
+
+    <com.rolling.view.TextViewIcon
+        style="@style/tvStyle_14"
+        android:id="@+id/tvAllType"
+        android:text="@string/filter_all_type"
+        android:padding="10dp"
+        ></com.rolling.view.TextViewIcon>
+
+    <com.rolling.view.TextViewIcon
+        style="@style/tvStyle_14"
+        android:id="@+id/tvSort"
+        android:text="@string/filter_def_sort"
+        android:layout_toRightOf="@+id/tvAllType"
+        android:padding="10dp"
+        ></com.rolling.view.TextViewIcon>
+
+    <com.rolling.view.TextViewIcon
+        style="@style/tvStyle_14"
+        android:id="@+id/tvCalendar"
+        android:text="日历"
+        android:padding="10dp"
+        android:layout_alignParentRight="true"
+        ></com.rolling.view.TextViewIcon>
+
+
+
+</RelativeLayout>

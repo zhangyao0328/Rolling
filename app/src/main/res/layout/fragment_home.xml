@@ -34,13 +34,7 @@
 
         </RelativeLayout>
 
-        <com.rolling.view.RollingBanner
-            android:id="@+id/convenientBanner"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:background="@color/colorPrimaryDark"
-            app:layout_scrollFlags="scroll"
-            app:canLoop="true" />
+
 
         <!--        <android.support.design.widget.CollapsingToolbarLayout-->
         <!--            android:id="@+id/toolbar_layout"-->

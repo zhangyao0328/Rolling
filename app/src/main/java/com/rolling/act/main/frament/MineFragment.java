@@ -1,17 +1,23 @@
 package com.rolling.act.main.frament;
 
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.rolling.R;
 import com.rolling.act.set.SysSetActivity;
 import com.rolling.base.prsenter.BasePresenterImpl;
 import com.rolling.base.view.BaseFragment;
 import com.rolling.bean.BaseBean;
+import com.rolling.bean.BaseDataBean;
 import com.rolling.bean.tab.TopTabBean;
 import com.rolling.net.HttpConfig;
+import com.rolling.util.CineToast;
 import com.rolling.util.OpenAcitivtyUtils;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -21,6 +27,10 @@ import butterknife.OnClick;
  * 首页-我的
  */
 public class MineFragment extends BaseFragment {
+
+    @BindView(R.id.edContent)
+    EditText edContent;
+
     @Override
     public int getLayoutContextView() {
         return R.layout.fragment_mine;
@@ -43,7 +53,8 @@ public class MineFragment extends BaseFragment {
 
     @Override
     public void succeed(Object o, int tag) {
-
+        BaseDataBean baseDataBean = JSONObject.parseObject(o.toString(), BaseDataBean.class);
+        CineToast.showShort(baseDataBean.getMessage());
     }
 
     @Override
@@ -88,12 +99,13 @@ public class MineFragment extends BaseFragment {
             basePresenter = new BasePresenterImpl(getActivity(), this);
         }
 
-        String url = HttpConfig.URL_API_HOME_TABS;
-        TopTabBean topTabBean = new TopTabBean();
-        topTabBean.setName("活动");
-        topTabBean.setLink(HttpConfig.URL_HOST + "/irs/list");
-        String json = JSON.toJSONString(topTabBean);
-        postLoad(new BaseBean(url, json, 1001, true, null));
+        if(!TextUtils.isEmpty(edContent.getText())){
+            String url = HttpConfig.URL_API_SPORT_TYPE;
+            TopTabBean topTabBean = new TopTabBean();
+            topTabBean.setName(edContent.getText().toString());
+            String json = JSON.toJSONString(topTabBean);
+            postLoad(new BaseBean(url, json, 1001, true, null));
+        }
     }
 
     private void addUser() {

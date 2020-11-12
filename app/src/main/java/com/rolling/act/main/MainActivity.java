@@ -5,14 +5,16 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.jpeng.jptabbar.JPTabBar;
 import com.rolling.R;
 import com.rolling.act.login.LoginActivity;
 import com.rolling.act.main.frament.DiscoverFragment;
-import com.rolling.act.main.frament.HomeFragment;
 import com.rolling.act.main.frament.MessageFragment;
 import com.rolling.act.main.frament.MineFragment;
+import com.rolling.act.main.frament.home.EventFragment;
+import com.rolling.act.main.frament.home.HomeFragment;
 import com.rolling.base.view.BaseActivity;
 import com.rolling.event.ExitEvent;
 import com.rolling.util.CineLog;
@@ -36,9 +38,14 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     @BindView(R.id.navigation)
     JPTabBar navigation;
 
+    @BindView(R.id.rootContentBg)
+    public View rootContentBg;
+
     private FragmentPagerAdapter pagerAdapter;
 
     private List<Fragment> fragmentList;
+
+    HomeFragment homeFragment;
 
     @Override
     public int getLayoutContextView() {
@@ -71,8 +78,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     private void initViewPage() {
 
+        homeFragment = new HomeFragment();
+
         fragmentList = new ArrayList<>();
-        fragmentList.add(new HomeFragment());
+        fragmentList.add(homeFragment);
         fragmentList.add(new DiscoverFragment());
         fragmentList.add(new MessageFragment());
         fragmentList.add(new MineFragment());
@@ -135,5 +144,17 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     @Subscribe
     public void eventBus(ExitEvent exitEvent) {
         CineToast.showShort("退出登录");
+    }
+
+    @Override
+    public void onBackPressed() {
+        EventFragment eventFragment = (EventFragment) homeFragment.fragmentList.get(0);
+        if(eventFragment.rootFilterContent.getVisibility() == View.VISIBLE){
+            eventFragment.rootFilterContent.setVisibility(View.GONE);
+            rootContentBg.setVisibility(View.GONE);
+        }else {
+            super.onBackPressed();
+        }
+
     }
 }

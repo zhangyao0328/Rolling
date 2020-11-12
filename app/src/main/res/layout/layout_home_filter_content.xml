@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/rootFilterContent"
+    android:background="@color/color66000000"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="top"
+    >
+
+    <com.rolling.view.RlRecyclerView
+        android:id="@+id/recyclerViewFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:visibility="gone"
+        ></com.rolling.view.RlRecyclerView>
+
+    <com.rolling.view.RlRecyclerView
+        android:id="@+id/recyclerViewSort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:visibility="gone"></com.rolling.view.RlRecyclerView>
+
+</RelativeLayout>

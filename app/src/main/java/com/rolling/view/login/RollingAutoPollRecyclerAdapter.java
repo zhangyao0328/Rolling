@@ -41,7 +41,7 @@ public class RollingAutoPollRecyclerAdapter extends BaseStandardAdapter<PollBgBe
         return Integer.MAX_VALUE;
     }
 
-    public class PollViewHolder extends BaseViewHolder {
+    public class PollViewHolder extends BaseViewHolder<PollBgBean> {
 
         @BindView(R.id.frescoImage)
         FrescoImage frescoImage;

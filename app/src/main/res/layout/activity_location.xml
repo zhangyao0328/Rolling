@@ -33,11 +33,11 @@
 
     </LinearLayout>
 
-    <com.rolling.view.RollingRecyclerView
-        android:id="@+id/rollingRecyclerView"
+    <com.rolling.view.RlRecyclerView
+        android:id="@+id/rlRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/layoutGpsCity"></com.rolling.view.RollingRecyclerView>
+        android:layout_below="@+id/layoutGpsCity"></com.rolling.view.RlRecyclerView>
 
     <com.bigkoo.quicksidebar.QuickSideBarTipsView
         android:id="@+id/quickSideBarTipsView"

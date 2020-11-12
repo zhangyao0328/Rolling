@@ -7,11 +7,11 @@ import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.rolling.R;
-import com.rolling.act.main.frament.adapter.HomeAdapter;
+import com.rolling.act.main.frament.home.HomeAdapter;
 import com.rolling.base.view.BaseFragment;
 import com.rolling.bean.home.HomeDataBean;
 import com.rolling.bean.tab.TopTabBean;
-import com.rolling.view.RollingRecyclerView;
+import com.rolling.view.RlRecyclerView;
 
 import butterknife.BindView;
 
@@ -29,7 +29,7 @@ public class RecyclerViewFragment extends BaseFragment implements OnRefreshListe
     public SwipeToLoadLayout swipeToLoadLayout;
 
     @BindView(R.id.swipe_target)
-    public RollingRecyclerView recyclerView;
+    public RlRecyclerView recyclerView;
 
     HomeAdapter adapter;
 
@@ -89,7 +89,7 @@ public class RecyclerViewFragment extends BaseFragment implements OnRefreshListe
 
     @Override
     public void onLoadMore() {
-
+        closeRecycler(swipeToLoadLayout);
     }
 
     @Override

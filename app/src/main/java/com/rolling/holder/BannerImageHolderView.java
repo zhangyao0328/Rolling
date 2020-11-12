@@ -5,7 +5,7 @@ import android.widget.FrameLayout;
 
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.rolling.R;
-import com.rolling.act.main.frament.HomeFragment;
+import com.rolling.act.main.frament.home.HomeFragment;
 import com.rolling.bean.MainBannerBean;
 import com.rolling.view.FrescoImage;
 import com.rolling.view.TextViewIcon;

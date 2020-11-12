@@ -5,6 +5,9 @@
     <!--view间距-->
     <dimen name="view_margin">10dp</dimen>
 
+    <!--刷新&加载更多-->
+    <dimen name="refresh_header_height_60">60dp</dimen>
+
     <!--banner指示器小点-->
     <dimen name="banner_point_n_w">10dp</dimen>
     <dimen name="banner_point_d_w">5dp</dimen>

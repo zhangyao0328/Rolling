@@ -16,5 +16,11 @@
         <item>文化</item>
     </string-array>
 
+    <string-array name="home_filter_sort_list">
+        <item>@string/filter_def_sort</item>
+        <item>@string/filter_def_news</item>
+        <item>@string/filter_def_times</item>
+    </string-array>
+
 
 </resources>

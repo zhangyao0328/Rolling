@@ -77,4 +77,16 @@ public class AppUtils {
         }
         return dpi;
     }
+
+    /**
+     * dp转px
+     *
+     * @param context context
+     * @param dpValue dp
+     * @return px
+     */
+    public static int dipToPx(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
 }

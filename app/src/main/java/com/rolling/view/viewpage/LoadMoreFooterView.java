@@ -1,11 +1,12 @@
 package com.rolling.view.viewpage;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
+import android.widget.TextView;
 
-import com.aspsine.swipetoloadlayout.SwipeLoadMoreTrigger;
-import com.aspsine.swipetoloadlayout.SwipeTrigger;
+import com.aspsine.swipetoloadlayout.SwipeLoadMoreFooterLayout;
+import com.rolling.R;
+import com.rolling.util.CineLog;
 
 /**
  * @author zhangyao
@@ -13,7 +14,12 @@ import com.aspsine.swipetoloadlayout.SwipeTrigger;
  * @E-mail android_n@163.com
  */
 
-public class LoadMoreFooterView extends AppCompatTextView implements SwipeTrigger, SwipeLoadMoreTrigger {
+public class LoadMoreFooterView extends SwipeLoadMoreFooterLayout {
+
+    private TextView tvLoadMore;
+//    private ProgressBar progressBar;
+    private int mHeaderHeight;
+
     public LoadMoreFooterView(Context context) {
         super(context);
     }
@@ -22,42 +28,57 @@ public class LoadMoreFooterView extends AppCompatTextView implements SwipeTrigge
         super(context, attrs);
     }
 
+    public LoadMoreFooterView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        mHeaderHeight = getResources().getDimensionPixelOffset(R.dimen.refresh_header_height_60);
+        tvLoadMore = (TextView) findViewById(R.id.tvLoadMore);
+//        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+    }
+
     @Override
     public void onLoadMore() {
-        setText("LOADING MORE");
+//        progressBar.setVisibility(VISIBLE);
+        tvLoadMore.setText("正在加载...");
     }
 
     @Override
     public void onPrepare() {
-        setText("");
+        CineLog.d("LoadMoreFooterView", "onPrepare()");
     }
 
     @Override
-    public void onMove(int yScrolled, boolean isComplete, boolean automatic) {
+    public void onMove(int y, boolean isComplete, boolean automatic) {
         if (!isComplete) {
-            if (yScrolled <= -getHeight()) {
-                setText("RELEASE TO LOAD MORE");
-            } else {
-                setText("SWIPE TO LOAD MORE");
+            if (y <= mHeaderHeight) {
+//                progressBar.setVisibility(VISIBLE);
+                tvLoadMore.setText("加载更多");
+            } else if(y > mHeaderHeight) {
+//                progressBar.setVisibility(GONE);
+                tvLoadMore.setText("上拉加载");
             }
-        } else {
-            setText("LOAD MORE RETURNING");
         }
     }
 
     @Override
     public void onRelease() {
-        setText("LOADING MORE");
+        super.onRelease();
     }
 
+    //加载完成
     @Override
     public void onComplete() {
-        setText("COMPLETE");
+//        progressBar.setVisibility(GONE);
+        tvLoadMore.setText("加载完成");
     }
 
     @Override
     public void onReset() {
-        setText("");
+        CineLog.d("LoadMoreFooterView", "onReset()");
     }
 
 }

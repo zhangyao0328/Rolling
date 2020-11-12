@@ -1,4 +1,4 @@
-package com.rolling.act.main.frament;
+package com.rolling.act.main.frament.home;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,7 +13,6 @@ import com.rolling.bean.tab.TopTabBean;
 import com.rolling.bean.tab.TopTabListBean;
 import com.rolling.net.HttpConfig;
 import com.rolling.util.OpenAcitivtyUtils;
-import com.rolling.view.RollingBanner;
 import com.rolling.view.tab.CineTabLayout;
 
 import java.util.ArrayList;
@@ -32,12 +31,10 @@ public class HomeFragment extends BaseTab3Fragment {
 
     private final int API_HOME_TABS = 1001;
 
-    @BindView(R.id.convenientBanner)
-    RollingBanner convenientBanner;
-
     @BindView(R.id.cineTabLayout)
     CineTabLayout cineTabLayout;
 
+    public List<Fragment> fragmentList = new ArrayList<>();
 
     public static int bannerW, bannerH;
 
@@ -68,13 +65,21 @@ public class HomeFragment extends BaseTab3Fragment {
             case API_HOME_TABS:
                 TopTabListBean topTabBeans = JSON.parseObject(t.toString(), TopTabListBean.class);
                 if (topTabBeans != null) {
-                    List<Fragment> fragmentList = new ArrayList<>();
+
                     for (TopTabBean baseDataBean : topTabBeans.getData()) {
-                        RecyclerViewFragment recyclerViewFragment = new RecyclerViewFragment();
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable(RecyclerViewFragment.class.getName(), baseDataBean);
-                        recyclerViewFragment.setArguments(bundle);
-                        fragmentList.add(recyclerViewFragment);
+                        if(baseDataBean.getName().contains("赛事")){
+                            EventFragment eventFragment = new EventFragment();
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable(EventFragment.class.getName(), baseDataBean);
+                            eventFragment.setArguments(bundle);
+                            fragmentList.add(eventFragment);
+                        }else {
+                            RecyclerViewFragment recyclerViewFragment = new RecyclerViewFragment();
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable(RecyclerViewFragment.class.getName(), baseDataBean);
+                            recyclerViewFragment.setArguments(bundle);
+                            fragmentList.add(recyclerViewFragment);
+                        }
                     }
                     setViewPager(fragmentList, topTabBeans.getData());
                 }

@@ -9,7 +9,7 @@ import android.view.View;
 import com.rolling.bean.tab.TopTabBean;
 import com.rolling.util.AppUtils;
 import com.rolling.util.CineLog;
-import com.rolling.view.RollingRecyclerView;
+import com.rolling.view.RlRecyclerView;
 import com.rolling.view.adapter.BaseSingleSelectAdapter;
 import com.rolling.view.adapter.OnItemClickListener;
 
@@ -20,7 +20,7 @@ import java.util.List;
  * @date 2019-08-11  19:50
  * @E-mail android_n@163.com
  */
-public class CineTabLayout extends RollingRecyclerView implements OnItemClickListener, BaseSingleSelectAdapter.CurrentSelectI {
+public class CineTabLayout extends RlRecyclerView implements OnItemClickListener, BaseSingleSelectAdapter.CurrentSelectI {
 
     Context mContext;
 

@@ -50,5 +50,9 @@ public class HttpConfig {
      * 地理位置
      */
     public final static String URL_API_LOCATION_CITY = URL_HOST + "/location/city";
+    /**
+     * 运动类型
+     */
+    public final static String URL_API_SPORT_TYPE = URL_HOST + "/sports/type";
 
 }

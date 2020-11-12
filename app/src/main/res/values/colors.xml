@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#959998</color>
     <color name="colorAccent">#333333</color>
 
+    <!--黑40%透明度-->
+    <color name="color66000000">#66000000</color>
+
     <color name="colorFFFFFF">#ffffff</color>
 
     <color name="color222222">#222222</color>

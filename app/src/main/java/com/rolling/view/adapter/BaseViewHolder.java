@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
  * @E-mail android_n@163.com
  */
 
-public class BaseViewHolder extends RecyclerView.ViewHolder implements OnItemClickListener {
+public abstract class BaseViewHolder<T> extends RecyclerView.ViewHolder implements OnItemClickListener {
 
     private final SparseArray<View> mViews;
 
@@ -29,6 +29,8 @@ public class BaseViewHolder extends RecyclerView.ViewHolder implements OnItemCli
         this.mViews = new SparseArray<>();
         ButterKnife.bind(this, itemView);
     }
+
+    public  abstract void buildData(T t);
 
 
     @SuppressWarnings("unchecked")

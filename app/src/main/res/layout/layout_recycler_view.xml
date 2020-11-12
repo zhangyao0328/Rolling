@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.rolling.view.RollingRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rollingRecyclerView"
+<com.rolling.view.RlRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlRecyclerView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-</com.rolling.view.RollingRecyclerView>
+</com.rolling.view.RlRecyclerView>

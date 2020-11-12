@@ -8,7 +8,7 @@ import com.rolling.base.view.BaseFragment;
 import com.rolling.net.HttpConfig;
 import com.rolling.util.CineLog;
 import com.rolling.util.LoginUtils;
-import com.rolling.view.RollingRecyclerView;
+import com.rolling.view.RlRecyclerView;
 
 import butterknife.BindView;
 
@@ -23,8 +23,8 @@ public class DiscoverChildFragment extends BaseFragment implements SwipeRefreshL
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    @BindView(R.id.rollingRecyclerView)
-    RollingRecyclerView rollingRecyclerView;
+    @BindView(R.id.rlRecyclerView)
+    RlRecyclerView rlRecyclerView;
 
     @Override
     public int getLayoutContextView() {

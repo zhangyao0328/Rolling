@@ -6,24 +6,21 @@
     >
 
 
-    <com.rolling.view.viewpage.RefreshHeaderView
+    <include
         android:id="@id/swipe_refresh_header"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="100dp" />
+        layout="@layout/layout_header"></include>
 
-    <com.rolling.view.RollingRecyclerView
+    <com.rolling.view.RlRecyclerView
         android:id="@+id/swipe_target"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        ></com.rolling.view.RollingRecyclerView>
+        ></com.rolling.view.RlRecyclerView>
 
-    <com.rolling.view.viewpage.LoadMoreFooterView
+
+    <include
         android:id="@id/swipe_load_more_footer"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="100dp" />
+        layout="@layout/layout_foot"></include>
 
 
 </com.aspsine.swipetoloadlayout.SwipeToLoadLayout>

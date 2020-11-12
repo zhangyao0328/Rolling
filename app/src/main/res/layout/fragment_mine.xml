@@ -6,6 +6,11 @@
     android:gravity="center"
     >
 
+    <EditText
+        android:id="@+id/edContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></EditText>
+
     <Button
         android:id="@+id/btAddUser"
         android:layout_width="match_parent"

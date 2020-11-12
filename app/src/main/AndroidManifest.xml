@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.rolling">
-
+    <!-- network -->
     <application
-        android:name="com.rolling.app.MyApplication"
+        android:name=".app.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--高德定位start-->
-        <meta-data
-            android:name="com.amap.api.v2.apikey"
-            android:value="16dbfcf62f4c169d2660bc5050360fe2" />
-        <service android:name="com.amap.api.location.APSService"></service>
-        <!--高德定位end-->
-
         <activity
-            android:name="com.rolling.act.location.LocationActivity"
-            android:label="@string/title_activity_location"
-            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:name=".act.calendar.CalendarSportActivity"
+            android:label="@string/title_activity_calendar_sport"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name="com.rolling.act.set.SysSetActivity" />
+        <!-- 高德定位start -->
         <activity
-            android:name="com.rolling.act.main.MainActivity"
+            android:name=".act.location.LocationActivity"
+            android:label="@string/title_activity_location"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+
+        <activity android:name=".act.set.SysSetActivity" /> <!-- 高德定位end -->
+        <activity
+            android:name=".act.main.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask">
             <intent-filter>
@@ -34,31 +33,32 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.rolling.act.login.LoginActivity"
+            android:name=".act.login.LoginActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_login"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-    </application> <!-- network -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="16dbfcf62f4c169d2660bc5050360fe2" />
+        <service android:name="com.amap.api.location.APSService" />
+    </application>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- permission -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- 保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
-    <uses-permission android:name="android.permission.READ_CALENDAR" /> <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- permission -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <!--用于进行网络定位-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
-    <!--用于访问GPS定位-->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
-    <!--用于读取手机当前的状态-->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
-    <!--用于申请调用A-GPS模块-->
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"></uses-permission>
+    <uses-permission android:name="android.permission.READ_PROFILE" /> <!-- 用于进行网络定位 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- 用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 用于申请调用A-GPS模块 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 
 </manifest>
