@@ -3,9 +3,11 @@ package com.rolling.base.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.github.anzewei.parallaxbacklayout.ParallaxHelper;
 import com.rolling.base.prsenter.BasePresenter;
 import com.rolling.base.prsenter.BasePresenterImpl;
 import com.rolling.bean.BaseBean;
@@ -67,6 +69,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     public void responseCode(int code) {
 
+    }
+
+    /**
+     * 左滑返回-禁止
+     */
+    public void disableBack(){
+        ParallaxHelper.disableParallaxBack(this);
     }
 
 }

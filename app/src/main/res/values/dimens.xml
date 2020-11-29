@@ -24,4 +24,17 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
+    <!--    头像-->
+    <dimen name="head_size_1">60dp</dimen>
+
+    <!--view离屏幕距离-->
+    <dimen name="layout_marginLeft_to_act">20dp</dimen>
+    <dimen name="layout_marginRight_to_act">20dp</dimen>
+
+    <!--toolbar-->
+    <dimen name="toolbar_h">48dp</dimen>
+    <dimen name="toolbar_margin_right">10dp</dimen>
+    <dimen name="toolbar_margin_left">10dp</dimen>
+
+
 </resources>

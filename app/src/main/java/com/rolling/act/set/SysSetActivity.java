@@ -79,7 +79,7 @@ public class SysSetActivity extends BaseActivity {
     }
 
     /**
-     * 登录
+     * 退出登录
      */
     private void signOut() {
 

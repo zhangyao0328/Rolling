@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.github.anzewei.parallaxbacklayout.ParallaxHelper;
 import com.rolling.R;
 import com.rolling.bean.user.UserLoginBean;
 
@@ -33,6 +34,7 @@ public class MyApplication extends Application {
 
         Fresco.initialize(this);
         initFont();
+        initActivityLifecycleCallbacks();
     }
 
     private void initFont() {
@@ -45,5 +47,9 @@ public class MyApplication extends Application {
 
     public static UserLoginBean getUserLoginBean() {
         return userLoginBean;
+    }
+
+    private void initActivityLifecycleCallbacks(){
+        registerActivityLifecycleCallbacks(ParallaxHelper.getInstance());
     }
 }

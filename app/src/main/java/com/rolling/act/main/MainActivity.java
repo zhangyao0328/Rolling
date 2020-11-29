@@ -55,6 +55,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     public void init() {
+        disableBack();
         EventBus.getDefault().register(this);
         initNavigationBar();
         initViewPage();

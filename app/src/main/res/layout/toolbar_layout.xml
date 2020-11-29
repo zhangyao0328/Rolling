@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/toolbar_h"
+    android:id="@+id/rootToobarView"
+    android:background="@color/colorFFFFFF">
+
+    <com.rolling.view.TextViewIcon
+        android:id="@+id/tvToolbarBack"
+        android:layout_width="@dimen/toolbar_h"
+        android:layout_height="@dimen/toolbar_h"
+        android:gravity="center"
+        android:text="@string/tv_arrow_left_icon"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true" />
+
+    <com.rolling.view.TextViewIcon
+        android:id="@+id/tvToolbarTitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_toLeftOf="@+id/tvToolbarRight"
+        android:layout_toRightOf="@+id/tvToolbarBack"
+        android:layout_marginRight="@dimen/toolbar_margin_right"
+        android:layout_marginLeft="@dimen/toolbar_margin_left" />
+
+    <com.rolling.view.TextViewIcon
+        android:id="@+id/tvToolbarRight"
+        android:layout_width="@dimen/toolbar_h"
+        android:layout_height="@dimen/toolbar_h"
+        android:gravity="center"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:visibility="invisible" />
+
+</RelativeLayout>

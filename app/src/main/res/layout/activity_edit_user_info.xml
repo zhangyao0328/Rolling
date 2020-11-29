@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".act.set.EditUserInfoActivity"
+    android:orientation="vertical"
+    >
+
+    <com.rolling.view.layout.ToolbarView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title= "@string/update_user_info"
+        app:arrow_left="@string/tv_arrow_left_icon"
+        ></com.rolling.view.layout.ToolbarView>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            ></LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+  </LinearLayout>

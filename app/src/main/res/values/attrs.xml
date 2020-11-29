@@ -6,4 +6,10 @@
         <attr name="ed_hint" format="string"></attr>
     </declare-styleable>
 
+    <declare-styleable name="layout_toolbar">
+        <attr name="arrow_left" format="string"></attr>
+        <attr name="title" format="string"></attr>
+        <attr name="arrow_right" format="string"></attr>
+    </declare-styleable>
+
 </resources>

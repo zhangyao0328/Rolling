@@ -7,7 +7,9 @@ import android.widget.EditText;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.rolling.R;
+import com.rolling.act.set.EditUserInfoActivity;
 import com.rolling.act.set.SysSetActivity;
+import com.rolling.app.MyApplication;
 import com.rolling.base.prsenter.BasePresenterImpl;
 import com.rolling.base.view.BaseFragment;
 import com.rolling.bean.BaseBean;
@@ -15,7 +17,10 @@ import com.rolling.bean.BaseDataBean;
 import com.rolling.bean.tab.TopTabBean;
 import com.rolling.net.HttpConfig;
 import com.rolling.util.CineToast;
+import com.rolling.util.LoginUtils;
 import com.rolling.util.OpenAcitivtyUtils;
+import com.rolling.view.FrescoImage;
+import com.rolling.view.TextViewIcon;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -31,6 +36,15 @@ public class MineFragment extends BaseFragment {
     @BindView(R.id.edContent)
     EditText edContent;
 
+    @BindView(R.id.imgHead)
+    FrescoImage imgHead;
+
+    @BindView(R.id.frescoImageBg)
+    FrescoImage frescoImageBg;
+
+    @BindView(R.id.tvUserName)
+    TextViewIcon tvUserName;
+
     @Override
     public int getLayoutContextView() {
         return R.layout.fragment_mine;
@@ -38,7 +52,7 @@ public class MineFragment extends BaseFragment {
 
     @Override
     public void init() {
-
+        initUserInfo();
     }
 
     @Override
@@ -67,7 +81,7 @@ public class MineFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.btAddBanner, R.id.btAddUser, R.id.btSet})
+    @OnClick({R.id.btAddBanner, R.id.btAddUser, R.id.btSet, R.id.layoutUserInfo})
     public void onClicks(View view) {
         switch (view.getId()) {
             case R.id.btAddBanner:
@@ -78,6 +92,9 @@ public class MineFragment extends BaseFragment {
                 break;
             case R.id.btSet:
                 OpenAcitivtyUtils.openAct(getContext(), SysSetActivity.class);
+                break;
+            case R.id.layoutUserInfo:
+                OpenAcitivtyUtils.openAct(getContext(), EditUserInfoActivity.class);
                 break;
         }
     }
@@ -109,5 +126,14 @@ public class MineFragment extends BaseFragment {
     }
 
     private void addUser() {
+    }
+
+    private void initUserInfo(){
+        if(LoginUtils.isLogin(getContext())){
+            imgHead.setImageURL(MyApplication.getUserLoginBean().getData().getAvatarUrl());
+            frescoImageBg.showUrlBlur(MyApplication.getUserLoginBean().getData().getAvatarUrl(), 10, 5);
+            tvUserName.setText(MyApplication.getUserLoginBean().getData().getUsername());
+        }
+
     }
 }

@@ -2,10 +2,14 @@ package com.rolling.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import androidx.annotation.Nullable;
+import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+
+import com.rolling.util.AppUtils;
 
 /**
  * @author zhangyao
@@ -20,25 +24,25 @@ public class TextViewIcon extends TextView implements ITextView{
     public TextViewIcon(Context context) {
         super(context);
         this.mContext = context;
-//        super.setTypeface(AppUtils.getIconfont());
+        super.setTypeface(AppUtils.getIconfont());
     }
 
     public TextViewIcon(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.mContext = context;
-//        super.setTypeface(AppUtils.getIconfont());
+        super.setTypeface(AppUtils.getIconfont());
     }
 
     public TextViewIcon(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.mContext = context;
-//        super.setTypeface(AppUtils.getIconfont());
+        super.setTypeface(AppUtils.getIconfont());
     }
 
-//    @Override
-//    public void setTypeface(Typeface tf, int style) {
-//        super.setTypeface(AppUtils.getIconfont(), style);
-//    }
+    @Override
+    public void setTypeface(Typeface tf, int style) {
+        super.setTypeface(AppUtils.getIconfont(), style);
+    }
 
     @Override
     public void setTexts(String str) {

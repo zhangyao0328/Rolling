@@ -1,10 +1,10 @@
 package com.rolling.util;
 
+import android.content.Context;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.rolling.app.MyApplication;
-import com.rolling.base.view.BaseActivity;
 import com.rolling.bean.user.UserLoginBean;
 import com.rolling.util.sp.RollingSp;
 
@@ -21,7 +21,7 @@ public class LoginUtils {
      *
      * @return
      */
-    public static boolean isLogin(BaseActivity baseActivity) {
+    public static boolean isLogin(Context baseActivity) {
 
         if (MyApplication.userLoginBean == null) {
             String token = (String) RollingSp.getData(baseActivity, RollingSp.ROLLING_USER_LOGIN_DATA, "");

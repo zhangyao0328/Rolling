@@ -1,11 +1,12 @@
 package com.rolling.util;
 
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.util.DisplayMetrics;
 import android.view.Display;
-import android.view.View;
 import android.view.WindowManager;
+
+import com.rolling.app.MyApplication;
 
 import java.lang.reflect.Method;
 
@@ -16,17 +17,11 @@ import java.lang.reflect.Method;
  */
 public class AppUtils {
 
+    private static Typeface iconfont = Typeface.createFromAsset(MyApplication.getInstance().getAssets(), "fonts/iconfont.ttf");
 
-    public static Bitmap convertViewToBitmap(View view, int size) {
-        view.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-        int width = size * 40;
-        view.layout(0, 0, width, view.getMeasuredHeight());  //根据字符串的长度显示view的宽度
-        view.buildDrawingCache();
-        Bitmap bitmap = view.getDrawingCache();
-        return bitmap;
+    public static Typeface getIconfont() {
+        return iconfont;
     }
-
 
     /**
      * 获得屏幕宽度
