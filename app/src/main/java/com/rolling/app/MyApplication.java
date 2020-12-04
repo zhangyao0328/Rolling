@@ -5,8 +5,10 @@ import android.content.Context;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.github.anzewei.parallaxbacklayout.ParallaxHelper;
+import com.hjq.toast.ToastUtils;
 import com.rolling.R;
 import com.rolling.bean.user.UserLoginBean;
+import com.rolling.helper.ActivityStackManager;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -31,10 +33,12 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         application = this;
-
+        // Activity 栈管理初始化
+        ActivityStackManager.getInstance().init(application);
         Fresco.initialize(this);
         initFont();
         initActivityLifecycleCallbacks();
+        ToastUtils.init(this);
     }
 
     private void initFont() {

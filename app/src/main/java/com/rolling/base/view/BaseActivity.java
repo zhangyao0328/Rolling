@@ -8,9 +8,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.anzewei.parallaxbacklayout.ParallaxHelper;
+import com.rolling.action.ClickAction;
 import com.rolling.base.prsenter.BasePresenter;
 import com.rolling.base.prsenter.BasePresenterImpl;
 import com.rolling.bean.BaseBean;
+import com.rolling.view.layout.ToolbarView;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -22,7 +24,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * @date 2018/7/29  22:11
  * @E-mail android_n@163.com
  */
-public abstract class BaseActivity extends AppCompatActivity implements BaseView{
+public abstract class BaseActivity extends AppCompatActivity implements BaseView, ClickAction, ToolbarView.IOnClickToolBarRight {
 
     BasePresenter basePresenter;
 
@@ -78,4 +80,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         ParallaxHelper.disableParallaxBack(this);
     }
 
+    @Override
+    public void onClickToolBarRight() {
+
+    }
 }

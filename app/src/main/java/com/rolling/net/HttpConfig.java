@@ -54,5 +54,13 @@ public class HttpConfig {
      * 运动类型
      */
     public final static String URL_API_SPORT_TYPE = URL_HOST + "/sports/type";
+    /**
+     * 七牛token
+     */
+    public final static String URL_API_QINIU_TOKEN = URL_HOST + "/qiniu/token";
+    /**
+     * 用户信息
+     */
+    public final static String URL_API_USER= URL_HOST + "/user";
 
 }

@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
 
-    <solid android:color="@color/colorFFFFFF"></solid>
+    <solid android:color="@color/white"></solid>
 
     <size android:width="@dimen/banner_point_n_w"></size>
     <size android:height="@dimen/banner_point_n_w"></size>

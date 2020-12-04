@@ -9,9 +9,14 @@
     <string name="net_error_request_failed">请求失败，请稍后再试</string>
     <string name="net_error_failures">网络连接失败，请稍后再试</string>
 
+    <string name="common_permission_hint">请先授予权限</string>
+    <string name="common_permission_fail">授权失败，请手动授予权限</string>
+
     <!--    public-->
     <string name="tv_cancel">取消</string>
     <string name="tv_arrow_left_icon">&#xe743;</string>
+    <string name="tv_arrow_save">保存</string>
+
 
 
     <!-- 注册登录 -->
@@ -40,6 +45,13 @@
 
 <!--    修改个人信息-->
     <string name="update_user_info">编辑个人信息</string>
+    <string name="personal_data_head">头像</string>
+    <string name="personal_data_name">昵称</string>
+    <string name="personal_data_name_hint">设置昵称</string>
+
+
+    <string name="image_select_title">图片选择</string>
+
 
     <!--filter-->
     <string name="filter_all_type">全部类型</string>

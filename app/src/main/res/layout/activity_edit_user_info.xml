@@ -10,10 +10,12 @@
     >
 
     <com.rolling.view.layout.ToolbarView
+        android:id="@+id/rootToobarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title= "@string/update_user_info"
         app:arrow_left="@string/tv_arrow_left_icon"
+        app:arrow_right="@string/tv_arrow_save"
         ></com.rolling.view.layout.ToolbarView>
 
     <androidx.core.widget.NestedScrollView
@@ -24,7 +26,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            ></LinearLayout>
+            >
+
+            <com.rolling.view.widget.SettingBar
+                android:id="@+id/fl_person_data_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/white_selector"
+                app:bar_leftText="@string/personal_data_head">
+
+                <com.rolling.view.FrescoImage
+                    android:id="@+id/iv_person_data_avatar"
+                    android:layout_width="@dimen/head_size_1"
+                    android:layout_height="@dimen/head_size_1"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_margin="20dp"
+                    app:placeholderImage="@color/color999999"
+                    app:roundAsCircle="true"
+                    />
+
+            </com.rolling.view.widget.SettingBar>
+
+            <com.rolling.view.widget.SettingBar
+                android:id="@+id/sb_person_data_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:bar_leftText="@string/personal_data_name"
+                app:bar_rightHint="@string/personal_data_name_hint"
+                app:bar_rightText="Android 轮子哥" />
+
+
+
+        </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 

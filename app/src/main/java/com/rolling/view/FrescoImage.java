@@ -56,6 +56,16 @@ public class FrescoImage extends SimpleDraweeView {
         }
     }
 
+    public void setImageFilePath2(String path) {
+        if (!TextUtils.isEmpty(path)) {
+            this.mUrl = path;
+            Uri uri = Uri.parse("file://" + path);
+            if (uri != null) {
+                super.setImageURI(uri);
+            }
+        }
+    }
+
     /**
      * 以高斯模糊显示。
      *

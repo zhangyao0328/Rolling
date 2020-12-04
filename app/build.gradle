@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-aspectjx'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     defaultConfig {
         applicationId "com.rolling"
         minSdkVersion 16
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -21,6 +22,30 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        // 剔除这个包下的所有文件（除了签名信息）
+        exclude 'META-INF/*******'
+    }
+
+    // AOP 配置
+    aspectjx {
+        // 排除一些第三方库的包名（Gson、 LeakCanary 和 AOP 有冲突）
+        // 否则就会起冲突：ClassNotFoundException: Didn't find class on path: DexPathList
+        exclude 'androidx', 'com.google', 'com.squareup', 'com.alipay', 'com.taobao', 'org.apache'
+    }
+
+    applicationVariants.all { variant ->
+
+        // Apk 输出文件名配置
+        variant.outputs.all { output ->
+            outputFileName = rootProject.getName() + '_v' + variant.versionName + '_' + variant.buildType.name
+            if (variant.buildType.name == buildTypes.release.getName()) {
+                outputFileName += '_' + new Date().format('MMdd')
+            }
+            outputFileName += '.apk'
+        }
     }
 }
 
@@ -52,4 +77,17 @@ dependencies {
     implementation 'com.haibin:calendarview:3.6.8'
     implementation 'com.youth.banner:banner:2.1.0'
     implementation 'com.github.anzewei:parallaxbacklayout:1.1.9'
+    //请求权限
+    implementation 'com.hjq:xxpermissions:9.2'
+    // AOP 插件库：https://mvnrepository.com/artifact/org.aspectj/aspectjrt
+    implementation 'org.aspectj:aspectjrt:1.9.5'
+    // 动画解析库：https://github.com/airbnb/lottie-android
+    // 动画资源：https://lottiefiles.com、https://icons8.com/animated-icons
+    implementation 'com.airbnb.android:lottie:3.5.0'
+    // 吐司框架：https://github.com/getActivity/ToastUtils
+    implementation 'com.hjq:toast:8.8'
+    // 本地图片选择器：https://github.com/lovetuzitong/MultiImageSelector
+    implementation 'com.github.lovetuzitong:MultiImageSelector:1.2'
+    //七牛sdk https://developer.qiniu.com/kodo/sdk/1236/android
+    implementation 'com.qiniu:qiniu-android-sdk:8.0.+'
 }

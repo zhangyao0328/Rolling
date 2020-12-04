@@ -2,6 +2,7 @@ package com.rolling.view.layout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,8 @@ public class ToolbarView extends RelativeLayout {
     @BindView(R.id.tvToolbarRight)
     TextViewIcon tvToolbarRight;
 
+    IOnClickToolBarRight iOnClickToolBarRight;
+
     public ToolbarView(Context context) {
         super(context);
         initView();
@@ -44,7 +47,12 @@ public class ToolbarView extends RelativeLayout {
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.layout_toolbar);
             tvToolbarBack.setText(typedArray.getString(R.styleable.layout_toolbar_arrow_left));
             tvToolbarTitle.setText(typedArray.getString(R.styleable.layout_toolbar_title));
-            tvToolbarRight.setText(typedArray.getString(R.styleable.layout_toolbar_arrow_right));
+            String right = typedArray.getString(R.styleable.layout_toolbar_arrow_right);
+            if (!TextUtils.isEmpty(right)) {
+                tvToolbarRight.setVisibility(VISIBLE);
+                tvToolbarRight.setText(right);
+            }
+
         }
 
     }
@@ -55,7 +63,11 @@ public class ToolbarView extends RelativeLayout {
         ButterKnife.bind(this, view);
     }
 
-    @OnClick({R.id.tvToolbarBack})
+    public void setiOnClickToolBarRight(IOnClickToolBarRight iOnClickToolBarRight) {
+        this.iOnClickToolBarRight = iOnClickToolBarRight;
+    }
+
+    @OnClick({R.id.tvToolbarBack, R.id.tvToolbarRight})
     public void onClicks(View view) {
         switch (view.getId()) {
             case R.id.tvToolbarBack:
@@ -63,6 +75,15 @@ public class ToolbarView extends RelativeLayout {
                     ((BaseActivity) getContext()).onBackPressed();
                 }
                 break;
+            case R.id.tvToolbarRight:
+                if (iOnClickToolBarRight != null) {
+                    iOnClickToolBarRight.onClickToolBarRight();
+                }
+                break;
         }
+    }
+
+    public interface IOnClickToolBarRight {
+        void onClickToolBarRight();
     }
 }

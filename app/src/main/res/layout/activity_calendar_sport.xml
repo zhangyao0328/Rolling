@@ -96,7 +96,7 @@
             android:id="@+id/rlRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorFFFFFF"></com.rolling.view.RlRecyclerView>
+            android:background="@color/white"></com.rolling.view.RlRecyclerView>
         　
     </com.haibin.calendarview.CalendarLayout>
 

@@ -7,8 +7,16 @@
     <!--黑40%透明度-->
     <color name="color66000000">#66000000</color>
 
-    <color name="colorFFFFFF">#ffffff</color>
-
     <color name="color222222">#222222</color>
     <color name="color999999">#999999</color>
+
+    <!-- 白色 -->
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- 黑色 -->
+    <color name="black">#FF000000</color>
+    <color name="black5">#0D000000</color>
+    <color name="black80">#CC000000</color>
+    <color name="black60">#99000000</color>
+    <color name="black30">#4D000000</color>
 </resources>

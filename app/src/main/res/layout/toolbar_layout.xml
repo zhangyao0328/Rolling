@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/toolbar_h"
     android:id="@+id/rootToobarView"
-    android:background="@color/colorFFFFFF">
+    android:background="@color/white">
 
     <com.rolling.view.TextViewIcon
         android:id="@+id/tvToolbarBack"
