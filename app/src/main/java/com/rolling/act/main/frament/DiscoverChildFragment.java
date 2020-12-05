@@ -3,7 +3,6 @@ package com.rolling.act.main.frament;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.rolling.R;
-import com.rolling.base.view.BaseActivity;
 import com.rolling.base.view.BaseFragment;
 import com.rolling.net.HttpConfig;
 import com.rolling.util.CineLog;
@@ -70,7 +69,7 @@ public class DiscoverChildFragment extends BaseFragment implements SwipeRefreshL
 //
 //        getLoad(url, null, null, 1001, false);
 
-        LoginUtils.isLogin((BaseActivity) getActivity());
+        LoginUtils.isLogin();
 
         String url = HttpConfig.URL_HOST +  "/irs/list";
 

@@ -31,13 +31,13 @@ public class DebugLogAspect {
     /**
      * 构造方法切入点
      */
-    @Pointcut("execution(@com.hjq.demo.aop.DebugLog *.new(..))")
+    @Pointcut("execution(@com.rolling.aop.DebugLog *.new(..))")
     public void constructor() {}
 
     /**
      * 方法切入点
      */
-    @Pointcut("execution(@com.hjq.demo.aop.DebugLog * *(..))")
+    @Pointcut("execution(@com.rolling.aop.DebugLog * *(..))")
     public void method() {}
 
     /**

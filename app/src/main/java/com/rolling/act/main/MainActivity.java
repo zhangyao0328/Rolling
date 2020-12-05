@@ -60,7 +60,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         initNavigationBar();
         initViewPage();
 
-        if (!LoginUtils.isLogin(this)) {
+        if (!LoginUtils.isLogin()) {
             openActivity(LoginActivity.class);
         }
 //

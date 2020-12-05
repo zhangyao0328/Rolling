@@ -102,15 +102,11 @@ public class EditUserInfoActivity extends BaseActivity {
         if (requestCode == REQUEST_IMAGE) {
             switch (resultCode) {
                 case RESULT_OK:
-//                    locImgPath = data.getData();
-
                     List<String> path = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
-
                     if (path != null) {
                         if (path.size() > 0) {
                             locImgPath = path.get(0);
                             iv_person_data_avatar.setImageFilePath2(locImgPath);
-
                             getQiNiuToken();
                         }
                     }

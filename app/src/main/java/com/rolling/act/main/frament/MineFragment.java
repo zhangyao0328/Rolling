@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.rolling.R;
 import com.rolling.act.set.EditUserInfoActivity;
 import com.rolling.act.set.SysSetActivity;
+import com.rolling.aop.IsLogin;
 import com.rolling.app.MyApplication;
 import com.rolling.base.prsenter.BasePresenterImpl;
 import com.rolling.base.view.BaseFragment;
@@ -81,6 +82,7 @@ public class MineFragment extends BaseFragment {
 
     }
 
+
     @OnClick({R.id.btAddBanner, R.id.btAddUser, R.id.btSet, R.id.layoutUserInfo})
     public void onClicks(View view) {
         switch (view.getId()) {
@@ -94,9 +96,14 @@ public class MineFragment extends BaseFragment {
                 OpenAcitivtyUtils.openAct(getContext(), SysSetActivity.class);
                 break;
             case R.id.layoutUserInfo:
-                OpenAcitivtyUtils.openAct(getContext(), EditUserInfoActivity.class);
+                openUserInfo();
                 break;
         }
+    }
+
+    @IsLogin(true)
+    private void openUserInfo(){
+        OpenAcitivtyUtils.openAct(getContext(), EditUserInfoActivity.class);
     }
 
     private void addBanner() {
@@ -129,7 +136,7 @@ public class MineFragment extends BaseFragment {
     }
 
     private void initUserInfo(){
-        if(LoginUtils.isLogin(getContext())){
+        if(LoginUtils.isLogin()){
             imgHead.setImageURL(MyApplication.getUserLoginBean().getData().getAvatarUrl());
             frescoImageBg.showUrlBlur(MyApplication.getUserLoginBean().getData().getAvatarUrl(), 10, 5);
             tvUserName.setText(MyApplication.getUserLoginBean().getData().getUsername());

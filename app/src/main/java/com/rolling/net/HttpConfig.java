@@ -61,6 +61,6 @@ public class HttpConfig {
     /**
      * 用户信息
      */
-    public final static String URL_API_USER= URL_HOST + "/user";
+    public final static String URL_API_USER = URL_HOST + "/user";
 
 }
