@@ -19,4 +19,16 @@
     <color name="black80">#CC000000</color>
     <color name="black60">#99000000</color>
     <color name="black30">#4D000000</color>
+
+    <!-- 分割线的颜色 -->
+    <color name="colorLine">#ECECEC</color>
+
+    <!-- 透明色 -->
+    <color name="transparent">#00000000</color>
+
+    <!-- 对话框确认按钮文本颜色 -->
+    <color name="colorConfirm">#007AFF</color>
+    <!-- 对话框取消按钮文本颜色 -->
+    <color name="colorCancel">#F44336</color>
+
 </resources>

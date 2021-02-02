@@ -16,6 +16,8 @@
     <string name="tv_cancel">取消</string>
     <string name="tv_arrow_left_icon">&#xe743;</string>
     <string name="tv_arrow_save">保存</string>
+    <string name="common_confirm">确定</string>
+    <string name="common_cancel">取消</string>
 
 
 

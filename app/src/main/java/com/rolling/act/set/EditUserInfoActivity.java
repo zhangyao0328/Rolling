@@ -1,6 +1,7 @@
 package com.rolling.act.set;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -15,14 +16,20 @@ import com.rolling.aop.Permissions;
 import com.rolling.aop.SingleClick;
 import com.rolling.app.MyApplication;
 import com.rolling.base.view.BaseActivity;
+import com.rolling.bean.BaseDataBean;
 import com.rolling.bean.other.QiNiuTokenBean;
 import com.rolling.bean.user.UserLoginBean;
+import com.rolling.event.UploadUserInfoEvent;
 import com.rolling.net.HttpConfig;
 import com.rolling.net.HttpManage;
 import com.rolling.util.CineLog;
 import com.rolling.view.FrescoImage;
+import com.rolling.view.dialog.InputDialog;
 import com.rolling.view.layout.ToolbarView;
+import com.rolling.view.widget.SettingBar;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -48,7 +55,12 @@ public class EditUserInfoActivity extends BaseActivity {
     @BindView(R.id.rootToobarView)
     ToolbarView rootToobarView;
 
+    @BindView(R.id.sb_person_data_name)
+    SettingBar mNameView;
+
     String locImgPath;
+
+    String avatarUrl;
 
     @Override
     public int getLayoutContextView() {
@@ -57,6 +69,7 @@ public class EditUserInfoActivity extends BaseActivity {
 
     @Override
     public void init() {
+        EventBus.getDefault().register(this);
         rootToobarView.setiOnClickToolBarRight(this);
     }
 
@@ -70,6 +83,14 @@ public class EditUserInfoActivity extends BaseActivity {
                     upLoadQiNiu(qiNiuTokenBean);
                 }
                 break;
+            case NET_UPLOAD_INFO:
+                BaseDataBean baseDataBean = JSON.parseObject(o.toString(), BaseDataBean.class);
+                if (baseDataBean != null) {
+                    if (baseDataBean.getCode() == 0) {
+                        EventBus.getDefault().post(new UploadUserInfoEvent(true));
+                    }
+                }
+                break;
         }
     }
 
@@ -79,11 +100,29 @@ public class EditUserInfoActivity extends BaseActivity {
     }
 
     @SingleClick
-    @OnClick({R.id.iv_person_data_avatar})
+    @OnClick({R.id.iv_person_data_avatar, R.id.sb_person_data_name})
     public void onClicks(View view) {
         switch (view.getId()) {
             case R.id.iv_person_data_avatar:
                 startSelectorImg();
+                break;
+            case R.id.sb_person_data_name:
+                new InputDialog.Builder(this)
+                        // 标题可以不用填写
+                        .setTitle(getString(R.string.personal_data_name_hint))
+                        .setContent(mNameView.getRightText())
+                        //.setHint(getString(R.string.personal_data_name_hint))
+                        //.setConfirm("确定")
+                        // 设置 null 表示不显示取消按钮
+                        //.setCancel("取消")
+                        // 设置点击按钮后不关闭对话框
+                        //.setAutoDismiss(false)
+                        .setListener((dialog, content) -> {
+                            if (!mNameView.getRightText().equals(content)) {
+                                mNameView.setRightText(content);
+                            }
+                        })
+                        .show();
                 break;
         }
     }
@@ -134,8 +173,8 @@ public class EditUserInfoActivity extends BaseActivity {
                         if (info.isOK()) {
                             CineLog.e("上传成功" + info + "\n" + res);
                             try {
-                                String url = bean.getData().getHost() + res.getString("key");
-                                CineLog.e("*********\n" + url);
+                                avatarUrl = bean.getData().getHost() + res.getString("key");
+                                CineLog.e("*********\n" + avatarUrl);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -154,7 +193,12 @@ public class EditUserInfoActivity extends BaseActivity {
     private void uploadUserInfo() {
         UserLoginBean.DataBean dataBean = new UserLoginBean.DataBean();
         dataBean.setId(MyApplication.getUserLoginBean().getData().getId());
-        dataBean.setUsername("测试修改");
+        if (!TextUtils.isEmpty(mNameView.getRightText())) {
+            dataBean.setNickName(mNameView.getRightText().toString());
+        }
+        if (!TextUtils.isEmpty(avatarUrl)) {
+            dataBean.setAvatarUrl(avatarUrl);
+        }
         String json = JSON.toJSONString(dataBean);
         postLoad(HttpConfig.URL_API_USER + "/" + MyApplication.getUserLoginBean().getData().getId(), json, NET_UPLOAD_INFO, true, HttpManage.PUT);
     }
@@ -162,5 +206,18 @@ public class EditUserInfoActivity extends BaseActivity {
     @Override
     public void onClickToolBarRight() {
         uploadUserInfo();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void refreshView(UploadUserInfoEvent uploadUserInfoEvent){
+        if(uploadUserInfoEvent.isSucceed()){
+            finish();
+        }
     }
 }

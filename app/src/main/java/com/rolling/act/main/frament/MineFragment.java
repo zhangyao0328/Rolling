@@ -5,23 +5,26 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.rolling.R;
 import com.rolling.act.set.EditUserInfoActivity;
 import com.rolling.act.set.SysSetActivity;
-import com.rolling.aop.IsLogin;
 import com.rolling.app.MyApplication;
 import com.rolling.base.prsenter.BasePresenterImpl;
 import com.rolling.base.view.BaseFragment;
 import com.rolling.bean.BaseBean;
-import com.rolling.bean.BaseDataBean;
 import com.rolling.bean.tab.TopTabBean;
+import com.rolling.bean.user.UserLoginBean;
+import com.rolling.event.UploadUserInfoEvent;
 import com.rolling.net.HttpConfig;
 import com.rolling.util.CineToast;
 import com.rolling.util.LoginUtils;
 import com.rolling.util.OpenAcitivtyUtils;
+import com.rolling.util.sp.RollingSp;
 import com.rolling.view.FrescoImage;
 import com.rolling.view.TextViewIcon;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -33,6 +36,8 @@ import butterknife.OnClick;
  * 首页-我的
  */
 public class MineFragment extends BaseFragment {
+
+    private final int NET_TAG_USER_INFO = 1001;
 
     @BindView(R.id.edContent)
     EditText edContent;
@@ -53,12 +58,12 @@ public class MineFragment extends BaseFragment {
 
     @Override
     public void init() {
-        initUserInfo();
+        getUserInfo();
     }
 
     @Override
     public void onCreate() {
-
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -68,8 +73,25 @@ public class MineFragment extends BaseFragment {
 
     @Override
     public void succeed(Object o, int tag) {
-        BaseDataBean baseDataBean = JSONObject.parseObject(o.toString(), BaseDataBean.class);
-        CineToast.showShort(baseDataBean.getMessage());
+        switch (tag) {
+            case NET_TAG_USER_INFO:
+                UserLoginBean userLoginBean = JSON.parseObject(o.toString(), UserLoginBean.class);
+                switch (userLoginBean.getCode()) {
+                    case 0:
+                        MyApplication.userLoginBean = userLoginBean;
+                        RollingSp.putData(getContext(), RollingSp.ROLLING_USER_LOGIN_DATA, o.toString());
+                        initUserInfo();
+                        break;
+                    default:
+                        if (!TextUtils.isEmpty(userLoginBean.getMessage())) {
+                            CineToast.showShort(userLoginBean.getMessage());
+                        }
+                        break;
+                }
+                break;
+        }
+//        BaseDataBean baseDataBean = JSONObject.parseObject(o.toString(), BaseDataBean.class);
+//        CineToast.showShort(baseDataBean.getMessage());
     }
 
     @Override
@@ -87,7 +109,8 @@ public class MineFragment extends BaseFragment {
     public void onClicks(View view) {
         switch (view.getId()) {
             case R.id.btAddBanner:
-                addBanner();
+//                addBanner();
+                getUserInfo();
                 break;
             case R.id.btAddUser:
                 addUser();
@@ -101,29 +124,18 @@ public class MineFragment extends BaseFragment {
         }
     }
 
-    @IsLogin(true)
-    private void openUserInfo(){
+    //    @IsLogin(true)
+    private void openUserInfo() {
         OpenAcitivtyUtils.openAct(getContext(), EditUserInfoActivity.class);
     }
 
     private void addBanner() {
-//        List<String> list = new ArrayList<>();
-//        list.add("https://tattoodo-mobile-app.imgix.net/images/posts/postImage_FrbD6eJgoX.png?w=1122&fit=crop&auto=format%2Ccompress");
-//        list.add("https://tattoodo-mobile-app.imgix.net/images/posts/ScreenShot2017-11-13at094213_YLwIX6GkPi.png?w=567&fit=crop&auto=format%2Ccompress");
-//        list.add("https://tattoodo-mobile-app.imgix.net/images/posts/postImage_0JiZ41Gjgx.png?w=1122&fit=crop&auto=format%2Ccompress");
-//        for (String str : list){
-//            MainBannerBean mainBannerBean = new MainBannerBean();
-//            mainBannerBean.setUrl(str);
-//            mainBannerBean.setUsername("hhh");
-//            mainBannerBean.setHeadUrl("https://images.unsplash.com/photo-1533369257659-6132475f793c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1c926464dc14a8282bdb1dad352424a6&auto=format&fit=crop&w=654&q=80");
-//            mainBannerBean.setTitle("今日推荐");
-//        }
 
         if (basePresenter == null) {
             basePresenter = new BasePresenterImpl(getActivity(), this);
         }
 
-        if(!TextUtils.isEmpty(edContent.getText())){
+        if (!TextUtils.isEmpty(edContent.getText())) {
             String url = HttpConfig.URL_API_SPORT_TYPE;
             TopTabBean topTabBean = new TopTabBean();
             topTabBean.setName(edContent.getText().toString());
@@ -135,12 +147,30 @@ public class MineFragment extends BaseFragment {
     private void addUser() {
     }
 
-    private void initUserInfo(){
-        if(LoginUtils.isLogin()){
+    private void initUserInfo() {
+        if (LoginUtils.isLogin()) {
             imgHead.setImageURL(MyApplication.getUserLoginBean().getData().getAvatarUrl());
             frescoImageBg.showUrlBlur(MyApplication.getUserLoginBean().getData().getAvatarUrl(), 10, 5);
-            tvUserName.setText(MyApplication.getUserLoginBean().getData().getUsername());
+            tvUserName.setText(MyApplication.getUserLoginBean().getData().getNickName());
         }
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void refreshView(UploadUserInfoEvent uploadUserInfoEvent) {
+        if (uploadUserInfoEvent.isSucceed()) {
+            getUserInfo();
+        }
+    }
+
+    public void getUserInfo() {
+        String[] key = {"id"};
+        String[] value = {String.valueOf(MyApplication.getUserLoginBean().getData().getId())};
+        getLoad(HttpConfig.URL_API_USER_INFO, key, value, NET_TAG_USER_INFO, true);
     }
 }

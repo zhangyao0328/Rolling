@@ -31,7 +31,9 @@
             app:TabAnimate="Scale"
             app:TabIconFilter="true"
             app:TabSelectColor="@android:color/black"
-            app:TabNormalColor="@android:color/darker_gray" />
+            app:TabNormalColor="@android:color/darker_gray"
+            app:TabTextSize="10sp"
+            />
 
         <View
             android:layout_width="match_parent"

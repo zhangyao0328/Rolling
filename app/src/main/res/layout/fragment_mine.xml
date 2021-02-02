@@ -92,6 +92,7 @@
                     android:layout_height="@dimen/head_size_1"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
+                    app:backgroundImage="@color/color999999"
                     app:roundAsCircle="true"
                     />
 
