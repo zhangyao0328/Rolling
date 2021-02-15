@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.rolling.view.FrescoImage
+        android:id="@+id/frescoImageBg"
+        android:layout_width="match_parent"
+        android:layout_height="670dp"
+        android:layout_marginTop="-300dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        app:layout_collapseMode="parallax"
+
+        />
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlEnablePureScrollMode="true"
+        app:srlDragRate="0.75">
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_marginLeft_to_act"
+                        android:layout_marginRight="@dimen/layout_marginRight_to_act">
+
+                        <RelativeLayout
+                            android:id="@+id/layoutUserInfo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_toLeftOf="@+id/imgHead"
+                            android:layout_centerVertical="true">
+
+                            <com.rolling.view.TextViewIcon
+                                style="@style/tvStyle_14"
+                                android:id="@+id/tvUserName"></com.rolling.view.TextViewIcon>
+
+                            <LinearLayout
+                                android:id="@+id/layoutUserName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_below="@+id/tvUserName">
+
+                                <com.rolling.view.TextViewIcon
+                                    style="@style/tvStyle_14"
+                                    android:text="@string/my_follow"></com.rolling.view.TextViewIcon>
+
+                                <com.rolling.view.TextViewIcon
+                                    style="@style/tvStyle_14"
+                                    android:text="11"></com.rolling.view.TextViewIcon>
+
+                            </LinearLayout>
+
+                            <View
+                                android:id="@+id/viewLine"
+                                android:layout_width="2dp"
+                                android:layout_height="30dp"
+                                android:background="@color/color999999"
+                                android:layout_below="@+id/tvUserName"
+                                android:layout_toRightOf="@+id/layoutUserName"
+                                android:layout_marginLeft="@dimen/layout_marginRight_to_act"
+                                android:layout_marginRight="@dimen/layout_marginRight_to_act"></View>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_below="@+id/tvUserName"
+                                android:layout_toRightOf="@+id/viewLine">
+
+                                <com.rolling.view.TextViewIcon
+                                    style="@style/tvStyle_14"
+                                    android:text="@string/my_fans"></com.rolling.view.TextViewIcon>
+
+                                <com.rolling.view.TextViewIcon
+                                    style="@style/tvStyle_14"
+                                    android:text="13"></com.rolling.view.TextViewIcon>
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <com.rolling.view.FrescoImage
+                            android:id="@+id/imgHead"
+                            android:layout_width="@dimen/head_size_1"
+                            android:layout_height="@dimen/head_size_1"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            app:backgroundImage="@color/color999999"
+                            app:roundAsCircle="true" />
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+                <EditText
+                    android:id="@+id/edContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></EditText>
+
+                <Button
+                    android:id="@+id/btAddUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" 添加user" />
+
+                <Button
+                    android:id="@+id/btAddBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" 添加banner" />
+
+
+                <Button
+                    android:id="@+id/btSet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="设置" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"></LinearLayout>
+
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+</FrameLayout>

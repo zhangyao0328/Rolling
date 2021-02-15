@@ -2,7 +2,9 @@ package com.rolling.bean.home
 
 import com.rolling.base.view.BaseView
 import com.rolling.bean.BaseDataBean
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class Item(
     val AdminUser: Int,
     val Cover: String,
@@ -13,7 +15,7 @@ data class Item(
     val Name: String,
     val StartDate: Int,
     val Type: String,
-    val ViewType : Int
+    val ViewType : Int = 0
 
 
 )

@@ -2,26 +2,31 @@ package com.rolling.act.main.frament;
 
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.core.widget.NestedScrollView;
 
 import com.alibaba.fastjson.JSON;
 import com.rolling.R;
 import com.rolling.act.set.EditUserInfoActivity;
 import com.rolling.act.set.SysSetActivity;
 import com.rolling.app.MyApplication;
-import com.rolling.base.prsenter.BasePresenterImpl;
 import com.rolling.base.view.BaseFragment;
-import com.rolling.bean.BaseBean;
-import com.rolling.bean.tab.TopTabBean;
 import com.rolling.bean.user.UserLoginBean;
 import com.rolling.event.UploadUserInfoEvent;
 import com.rolling.net.HttpConfig;
+import com.rolling.util.CineLog;
 import com.rolling.util.CineToast;
 import com.rolling.util.LoginUtils;
 import com.rolling.util.OpenAcitivtyUtils;
 import com.rolling.util.sp.RollingSp;
 import com.rolling.view.FrescoImage;
 import com.rolling.view.TextViewIcon;
+import com.scwang.smart.refresh.layout.api.RefreshFooter;
+import com.scwang.smart.refresh.layout.api.RefreshHeader;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.constant.RefreshState;
+import com.scwang.smart.refresh.layout.listener.OnMultiListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -39,8 +44,8 @@ public class MineFragment extends BaseFragment {
 
     private final int NET_TAG_USER_INFO = 1001;
 
-    @BindView(R.id.edContent)
-    EditText edContent;
+    @BindView(R.id.refreshLayout)
+    RefreshLayout refreshLayout;
 
     @BindView(R.id.imgHead)
     FrescoImage imgHead;
@@ -51,13 +56,20 @@ public class MineFragment extends BaseFragment {
     @BindView(R.id.tvUserName)
     TextViewIcon tvUserName;
 
+    @BindView(R.id.scrollView)
+    NestedScrollView scrollView;
+
+    private int mOffset = 0;
+    private int mScrollY = 0;
+
     @Override
     public int getLayoutContextView() {
-        return R.layout.fragment_mine;
+        return R.layout.fragment_main_mine;
     }
 
     @Override
     public void init() {
+        setOnMultiPurposeListener();
         getUserInfo();
     }
 
@@ -105,16 +117,9 @@ public class MineFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.btAddBanner, R.id.btAddUser, R.id.btSet, R.id.layoutUserInfo})
+    @OnClick({R.id.btSet, R.id.layoutUserInfo})
     public void onClicks(View view) {
         switch (view.getId()) {
-            case R.id.btAddBanner:
-//                addBanner();
-                getUserInfo();
-                break;
-            case R.id.btAddUser:
-                addUser();
-                break;
             case R.id.btSet:
                 OpenAcitivtyUtils.openAct(getContext(), SysSetActivity.class);
                 break;
@@ -129,20 +134,6 @@ public class MineFragment extends BaseFragment {
         OpenAcitivtyUtils.openAct(getContext(), EditUserInfoActivity.class);
     }
 
-    private void addBanner() {
-
-        if (basePresenter == null) {
-            basePresenter = new BasePresenterImpl(getActivity(), this);
-        }
-
-        if (!TextUtils.isEmpty(edContent.getText())) {
-            String url = HttpConfig.URL_API_SPORT_TYPE;
-            TopTabBean topTabBean = new TopTabBean();
-            topTabBean.setName(edContent.getText().toString());
-            String json = JSON.toJSONString(topTabBean);
-            postLoad(new BaseBean(url, json, 1001, true, null));
-        }
-    }
 
     private void addUser() {
     }
@@ -169,8 +160,80 @@ public class MineFragment extends BaseFragment {
     }
 
     public void getUserInfo() {
-        String[] key = {"id"};
-        String[] value = {String.valueOf(MyApplication.getUserLoginBean().getData().getId())};
-        getLoad(HttpConfig.URL_API_USER_INFO, key, value, NET_TAG_USER_INFO, true);
+        if(MyApplication.getUserLoginBean() != null){
+
+            String[] key = {"id"};
+            String[] value = {String.valueOf(MyApplication.getUserLoginBean().getData().getId())};
+            getLoad(HttpConfig.URL_API_USER_INFO, key, value, NET_TAG_USER_INFO, true);
+        }
+    }
+
+    private void setOnMultiPurposeListener() {
+
+
+
+        refreshLayout.setOnRefreshLoadMoreListener(new OnMultiListener() {
+            @Override
+            public void onHeaderMoving(RefreshHeader header, boolean isDragging, float percent, int offset, int headerHeight, int maxDragHeight) {
+                mOffset = offset / 2;
+                frescoImageBg.setTranslationY(mOffset - mScrollY);
+
+                CineLog.e("onHeaderMoving");
+            }
+
+            @Override
+            public void onHeaderReleased(RefreshHeader header, int headerHeight, int maxDragHeight) {
+                CineLog.e("onHeaderReleased");
+            }
+
+            @Override
+            public void onHeaderStartAnimator(RefreshHeader header, int headerHeight, int maxDragHeight) {
+                CineLog.e("onHeaderStartAnimator");
+            }
+
+            @Override
+            public void onHeaderFinish(RefreshHeader header, boolean success) {
+                CineLog.e("onHeaderFinish");
+            }
+
+            @Override
+            public void onFooterMoving(RefreshFooter footer, boolean isDragging, float percent, int offset, int footerHeight, int maxDragHeight) {
+                CineLog.e("onFooterMoving");
+
+                mOffset = offset / 2;
+                frescoImageBg.setTranslationY(mOffset - mScrollY);
+            }
+
+            @Override
+            public void onFooterReleased(RefreshFooter footer, int footerHeight, int maxDragHeight) {
+                CineLog.e("onFooterReleased");
+            }
+
+            @Override
+            public void onFooterStartAnimator(RefreshFooter footer, int footerHeight, int maxDragHeight) {
+                CineLog.e("onFooterStartAnimator");
+            }
+
+            @Override
+            public void onFooterFinish(RefreshFooter footer, boolean success) {
+                CineLog.e("onFooterFinish");
+            }
+
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                CineLog.e("onLoadMore");
+            }
+
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                CineLog.e("onRefresh");
+            }
+
+            @Override
+            public void onStateChanged(@NonNull RefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
+                CineLog.e("onStateChanged");
+            }
+        });
+
     }
 }

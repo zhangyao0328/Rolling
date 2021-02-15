@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-aspectjx'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 30
@@ -10,6 +12,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        multiDexEnabled true
 
     }
     buildTypes {
@@ -33,7 +36,7 @@ android {
     aspectjx {
         // 排除一些第三方库的包名（Gson、 LeakCanary 和 AOP 有冲突）
         // 否则就会起冲突：ClassNotFoundException: Didn't find class on path: DexPathList
-        exclude 'androidx', 'com.google', 'com.squareup', 'com.alipay', 'com.taobao', 'org.apache'
+        exclude 'androidx', 'com.google', 'com.squareup', 'com.alipay', 'com.taobao', 'org.apache','versions.9'
     }
 
     applicationVariants.all { variant ->
@@ -58,9 +61,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'com.jakewharton:butterknife:10.2.3'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+    kapt 'com.jakewharton:butterknife-compiler:10.2.3'
     implementation 'com.alibaba:fastjson:1.1.57.android'
     implementation 'com.jpeng:JPTabBar:1.4.0'
     implementation 'com.facebook.fresco:fresco:1.10.0'
@@ -90,4 +96,12 @@ dependencies {
     implementation 'com.github.lovetuzitong:MultiImageSelector:1.2'
     //七牛sdk https://developer.qiniu.com/kodo/sdk/1236/android
     implementation 'com.qiniu:qiniu-android-sdk:8.0.+'
+    //下拉刷新 https://github.com/scwang90/SmartRefreshLayout
+    implementation  'com.scwang.smart:refresh-layout-kernel:2.0.3'
+    //oom监听 https://square.github.io/leakcanary/getting_started/
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
+    implementation 'com.android.support:multidex:1.0.3'
+    //    kotlin json 解析 https://github.com/square/moshi
+    implementation("com.squareup.moshi:moshi-kotlin:1.11.0")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.11.0")
 }
