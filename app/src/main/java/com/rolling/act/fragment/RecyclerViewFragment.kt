@@ -7,9 +7,11 @@ import com.aspsine.swipetoloadlayout.OnLoadMoreListener
 import com.aspsine.swipetoloadlayout.OnRefreshListener
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout
 import com.rolling.R
+import com.rolling.act.main.frament.home.ritem.adapter.RItemAdapter
 import com.rolling.base.view.BaseFragment
 import com.rolling.bean.home.ActivitiesBean
 import com.rolling.bean.tab.TopTabBean
+import com.rolling.net.NetParameter
 import com.rolling.view.RlRecyclerView
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
@@ -25,23 +27,18 @@ class RecyclerViewFragment : BaseFragment(), OnRefreshListener, OnLoadMoreListen
     private val NET_GET_IRS_DATA = 1001
     private val NET_GET_IRS_DATA_LOADMORE = 1002
 
-    @JvmField
     @BindView(R.id.swipeToLoadLayout)
-    var swipeToLoadLayout: SwipeToLoadLayout? = null
+    lateinit var swipeToLoadLayout: SwipeToLoadLayout
 
-    @JvmField
     @BindView(R.id.swipe_target)
-    var recyclerView: RlRecyclerView? = null
+    lateinit var recyclerView: RlRecyclerView
 
-    @JvmField
-    @BindView(R.id.layoutFilter)
-    var layoutFilter: RelativeLayout? = null
-    var adapter: RecyclerAdapter? = null
+    lateinit var adapter: RItemAdapter
     var topTabBean: TopTabBean? = null
-    private val mCurrentPosition = 0
-    var mSuspensionHeight = 0
+
+
     override fun getLayoutContextView(): Int {
-        return R.layout.fragment_recycler_view
+        return R.layout.swipe_to_load_layout_new
     }
 
     override fun init() {
@@ -50,23 +47,20 @@ class RecyclerViewFragment : BaseFragment(), OnRefreshListener, OnLoadMoreListen
             topTabBean = bundle.getSerializable(this.javaClass.name) as TopTabBean?
         }
 
-        if(recyclerView == null || swipeToLoadLayout == null ){
+        if (recyclerView == null || swipeToLoadLayout == null) {
             return
         }
 
         recyclerView!!.initCineRecyclerViewNoDecoration(context)
         swipeToLoadLayout!!.setOnRefreshListener(this)
         swipeToLoadLayout!!.setOnLoadMoreListener(this)
-        adapter = RecyclerAdapter(context!!)
+        adapter = RItemAdapter(context!!)
         recyclerView!!.adapter = adapter
     }
 
-    private fun updateSuspensionBar() {
-
-//        layoutFilter.setText("button " + mCurrentPosition);
-    }
 
     override fun onCreate() {}
+
     override fun firstLoadDate() {
         if (swipeToLoadLayout == null)
             return
@@ -76,40 +70,58 @@ class RecyclerViewFragment : BaseFragment(), OnRefreshListener, OnLoadMoreListen
     override fun succeed(o: Any, tag: Int) {
         when (tag) {
             NET_GET_IRS_DATA -> {
-                val homeDataBean = JSON.parseObject(o.toString(), ActivitiesBean::class.java)
+                val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+                val homeDataBean = moshi.adapter(ActivitiesBean::class.java).fromJson(o.toString())
                 if (adapter!!.itemCount > 0) {
                     adapter!!.clearItems()
                 }
-                buildData(homeDataBean)
+                if (homeDataBean != null) {
+                    buildData(homeDataBean)
+                }
             }
             NET_GET_IRS_DATA_LOADMORE -> {
                 val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
                 val bean = moshi.adapter(ActivitiesBean::class.java).fromJson(o.toString())
                 if (bean != null) {
-                    adapter!!.addItems(bean.data.items)
+                    buildData(bean)
                 }
             }
         }
         closeRecycler(swipeToLoadLayout)
     }
 
-    override fun error(o: Any, tag: Int) {}
-    override fun onLoadMore() {
+    override fun error(o: Any, tag: Int) {
+
         closeRecycler(swipeToLoadLayout)
+    }
+
+    override fun onLoadMore() {
+        getData(NET_GET_IRS_DATA_LOADMORE)
     }
 
     override fun onRefresh() {
         if (topTabBean != null) {
-            data
+            getData(NET_GET_IRS_DATA)
         }
     }
 
-    private val data: Unit
-        private get() {
-            getLoad(topTabBean!!.link, null, null, NET_GET_IRS_DATA_LOADMORE, false)
+
+    fun getData(tag: Int) {
+        when (tag) {
+            NET_GET_IRS_DATA -> {
+                getLoad(topTabBean!!.link, null, null, tag, false)
+            }
+            NET_GET_IRS_DATA_LOADMORE -> {
+                var key = arrayOf(NetParameter.LimitKey, NetParameter.PageKey)
+                var value = arrayOf(NetParameter.LimitValue, pageInfo.nextPage.toString())
+                getLoad(topTabBean!!.link, key, value, tag, false)
+            }
         }
 
+    }
+
     private fun buildData(activitiesBean: ActivitiesBean) {
+        pageInfo = activitiesBean.data.pageInfo
         adapter!!.addItems(activitiesBean.data.items)
 
 //        Item item = new Item();

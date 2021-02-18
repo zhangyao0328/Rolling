@@ -4,6 +4,6 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class Data(
-    val items: List<Item>,
-    val totalCount: Int
+    val items: List<Item>?,
+    val pageInfo: PageInfo
 )

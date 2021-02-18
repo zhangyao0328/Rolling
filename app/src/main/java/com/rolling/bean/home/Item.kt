@@ -3,6 +3,7 @@ package com.rolling.bean.home
 import com.rolling.base.view.BaseView
 import com.rolling.bean.BaseDataBean
 import com.squareup.moshi.JsonClass
+import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
 data class Item(
@@ -18,4 +19,4 @@ data class Item(
     val ViewType : Int = 0
 
 
-)
+) : Serializable

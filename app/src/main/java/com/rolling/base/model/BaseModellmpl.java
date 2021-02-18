@@ -147,7 +147,6 @@ public class BaseModellmpl implements BaseModel {
             }
         }
         mBaseView.succeed(response.toString(), tag);
-        CineLog.e(response.toString());
     }
 
     private void onFailures(Call call, IOException e, int tag) {

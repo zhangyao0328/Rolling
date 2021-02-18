@@ -1,8 +1,5 @@
 package com.rolling.view.adapter;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.View;
@@ -58,43 +55,6 @@ public abstract class BaseViewHolder<T> extends RecyclerView.ViewHolder implemen
     @Override
     public void onItemClick(View view, int position) {
 
-    }
-
-    public void openActivity(Context mContext, Class<?> act) {
-        mContext.startActivity(new Intent(mContext, act));
-    }
-
-    public void openActivity(Context mContext, Class<?> act, Bundle bundle) {
-        Intent intent = new Intent(mContext, act);
-        intent.putExtras(bundle);
-        mContext.startActivity(intent);
-    }
-
-    public void openActivity(Context mContext, Class<?> act, Bundle bundle, int flag) {
-        Intent intent = new Intent(mContext, act);
-        intent.putExtras(bundle);
-        intent.setFlags(flag);
-        mContext.startActivity(intent);
-    }
-
-    public void openActivity(Context mContext, Class<?> act, String key, int tag) {
-        Intent intent = new Intent(mContext, act);
-        intent.putExtra(key, tag);
-        mContext.startActivity(intent);
-    }
-
-    public void openActivity(Context mContext, Class<?> act, String key, String value) {
-        Intent intent = new Intent(mContext, act);
-        intent.putExtra(key, value);
-        mContext.startActivity(intent);
-    }
-
-    public void openActivity(Context mContext, Class<?> act, String key, String value, int flag) {
-        Intent intent = new Intent(mContext, act);
-        intent.putExtra(key, value);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        intent.setFlags(flag);
-        mContext.startActivity(intent);
     }
 
 

@@ -16,6 +16,8 @@ import com.rolling.view.layout.ToolbarView;
 
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.Map;
+
 import butterknife.ButterKnife;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -64,6 +66,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             basePresenter = new BasePresenterImpl(this, this);
         }
         BaseBean baseBean = new BaseBean(url, strJson, tag, isDialog, method);
+        basePresenter.postAsync(this, baseBean);
+    }
+
+    public void postLoad(String url, Map<String, String> map, int tag, boolean isDialog, String method) {
+        if (basePresenter == null) {
+            basePresenter = new BasePresenterImpl(this, this);
+        }
+        BaseBean baseBean = new BaseBean(url, map, tag, isDialog, method);
         basePresenter.postAsync(this, baseBean);
     }
 

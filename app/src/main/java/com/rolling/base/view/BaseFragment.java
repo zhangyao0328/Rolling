@@ -14,6 +14,7 @@ import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.rolling.base.prsenter.BasePresenter;
 import com.rolling.base.prsenter.BasePresenterImpl;
 import com.rolling.bean.BaseBean;
+import com.rolling.bean.home.PageInfo;
 
 import butterknife.ButterKnife;
 
@@ -38,6 +39,8 @@ public abstract class BaseFragment extends Fragment implements BaseView{
      * 数据是否加载完毕
      */
     private boolean isLoadDataComleted;
+
+     public PageInfo pageInfo;
 
     @Nullable
     @Override

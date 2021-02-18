@@ -1,8 +1,9 @@
 package com.rolling.act.main.frament.home;
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.View;
+
+import androidx.fragment.app.Fragment;
 
 import com.alibaba.fastjson.JSON;
 import com.rolling.R;
