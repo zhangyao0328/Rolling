@@ -120,6 +120,12 @@
         <attr name="bar_rightIcon" format="reference" />
         <attr name="bar_rightColor" format="color" />
         <attr name="bar_rightSize" format="dimension" />
+        <!-- 右边EditText -->
+        <attr name="bar_rightEdText" format="string" />
+        <attr name="bar_rightEdHintText" format="string" />
+        <attr name="bar_rightEdBg" format="integer" />
+        <attr name="bar_rightEdColor" format="color" />
+        <attr name="bar_rightEdSize" format="dimension" />
         <!-- 分割线 -->
         <attr name="bar_lineVisible" format="boolean" />
         <attr name="bar_lineColor" format="reference|color" />

@@ -61,4 +61,16 @@
     <string name="filter_def_times">近期上新</string>
     <string name="title_activity_calendar_sport">ScrollingActivity</string>
 
+    <!--    发布活动-->
+    <string name="create_ritem_toolbar_title">发布活动</string>
+    <string name="create_ritem_toolbar_right">预览</string>
+    <string name="create_ritem_add_img">添加照片</string>
+    <string name="create_ritem_bottom_save">保存为草稿</string>
+    <string name="create_ritem_bottom_put">立即发布</string>
+    <string name="create_ritem_title">活动标题</string>
+    <string name="create_ritem_title_hint">请输入活动标题</string>
+    <string name="create_ritem_detail_title">活动详情</string>
+    <string name="create_ritem_edit_detail_title">编辑活动详情</string>
+    <string name="create_ritem_edit_detail_hint">请输入活动内容</string>
+
 </resources>

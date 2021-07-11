@@ -1,8 +1,6 @@
 package com.rolling.act.fragment
 
-import android.widget.RelativeLayout
 import butterknife.BindView
-import com.alibaba.fastjson.JSON
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener
 import com.aspsine.swipetoloadlayout.OnRefreshListener
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout
@@ -12,11 +10,9 @@ import com.rolling.base.view.BaseFragment
 import com.rolling.bean.home.ActivitiesBean
 import com.rolling.bean.tab.TopTabBean
 import com.rolling.net.NetParameter
-import com.rolling.view.RlRecyclerView
-import com.squareup.moshi.JsonAdapter
+import com.rolling.view.recvcler.RlRecyclerView
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import java.io.IOException
 
 /**
  * @author zhangyao
@@ -47,24 +43,18 @@ class RecyclerViewFragment : BaseFragment(), OnRefreshListener, OnLoadMoreListen
             topTabBean = bundle.getSerializable(this.javaClass.name) as TopTabBean?
         }
 
-        if (recyclerView == null || swipeToLoadLayout == null) {
-            return
-        }
-
-        recyclerView!!.initCineRecyclerViewNoDecoration(context)
-        swipeToLoadLayout!!.setOnRefreshListener(this)
-        swipeToLoadLayout!!.setOnLoadMoreListener(this)
+        recyclerView.initCineRecyclerViewNoDecoration(context)
+        swipeToLoadLayout.setOnRefreshListener(this)
+        swipeToLoadLayout.setOnLoadMoreListener(this)
         adapter = RItemAdapter(context!!)
-        recyclerView!!.adapter = adapter
+        recyclerView.adapter = adapter
     }
 
 
     override fun onCreate() {}
 
     override fun firstLoadDate() {
-        if (swipeToLoadLayout == null)
-            return
-        swipeToLoadLayout!!.isRefreshing = true
+        swipeToLoadLayout.isRefreshing = true
     }
 
     override fun succeed(o: Any, tag: Int) {
@@ -72,12 +62,13 @@ class RecyclerViewFragment : BaseFragment(), OnRefreshListener, OnLoadMoreListen
             NET_GET_IRS_DATA -> {
                 val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
                 val homeDataBean = moshi.adapter(ActivitiesBean::class.java).fromJson(o.toString())
-                if (adapter!!.itemCount > 0) {
-                    adapter!!.clearItems()
+                if (adapter.itemCount > 0) {
+                    adapter.clearItems()
                 }
                 if (homeDataBean != null) {
                     buildData(homeDataBean)
                 }
+
             }
             NET_GET_IRS_DATA_LOADMORE -> {
                 val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
@@ -122,7 +113,7 @@ class RecyclerViewFragment : BaseFragment(), OnRefreshListener, OnLoadMoreListen
 
     private fun buildData(activitiesBean: ActivitiesBean) {
         pageInfo = activitiesBean.data.pageInfo
-        adapter!!.addItems(activitiesBean.data.items)
+        adapter.addItems(activitiesBean.data.items)
 
 //        Item item = new Item();
 //        item.(adapter.TYPE_FILTER);

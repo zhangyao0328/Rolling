@@ -22,7 +22,7 @@ import com.rolling.bean.location.CityBeanResponse;
 import com.rolling.net.HttpConfig;
 import com.rolling.util.CineLog;
 import com.rolling.util.CineToast;
-import com.rolling.view.RlRecyclerView;
+import com.rolling.view.recvcler.RlRecyclerView;
 import com.rolling.view.TextViewIcon;
 import com.rolling.view.adapter.OnItemClickListener;
 import com.rolling.view.search.SearchLayout;

@@ -1,9 +1,8 @@
 package com.rolling.util
 
 import android.content.Context
-import android.os.Bundle
 import android.content.Intent
-import com.rolling.util.OpenAcitivtyUtils
+import android.os.Bundle
 
 /**
  * @author zhangyao
@@ -12,6 +11,8 @@ import com.rolling.util.OpenAcitivtyUtils
  * 公共跳转工具类
  */
 object OpenAcitivtyUtils {
+
+
     fun openAct(mContext: Context, act: Class<*>?, bundle: Bundle?) {
         if (bundle != null) {
             val intent = Intent(mContext, act)

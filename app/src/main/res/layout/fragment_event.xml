@@ -45,11 +45,11 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.rolling.view.RlRecyclerView
+        <com.rolling.view.recvcler.RlRecyclerView
             android:id="@+id/rlRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"></com.rolling.view.RlRecyclerView>
+            android:clipToPadding="false"></com.rolling.view.recvcler.RlRecyclerView>
 
         <ViewStub
             android:id="@+id/viewStubFilter"

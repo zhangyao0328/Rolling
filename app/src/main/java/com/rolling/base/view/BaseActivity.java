@@ -1,7 +1,6 @@
 package com.rolling.base.view;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -49,9 +48,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
-    public void openActivity(Class<?> act) {
-        startActivity(new Intent(this, act));
-    }
 
     public void getLoad(String url, String[] key, String[] value, int tag, boolean isDialog) {
         if (basePresenter == null) {

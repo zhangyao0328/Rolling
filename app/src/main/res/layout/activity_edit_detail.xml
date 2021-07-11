@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".act.main.frament.home.ritem.holder.EditDetailActivity">
+
+
+    <com.rolling.view.layout.ToolbarView
+        android:id="@+id/rootToobarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="@string/create_ritem_edit_detail_title"
+        app:arrow_left="@drawable/arrows_left_ic"
+        app:arrow_right="@string/create_ritem_toolbar_right"
+        android:layout_alignParentTop="true"></com.rolling.view.layout.ToolbarView>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@null"
+        android:hint="@string/create_ritem_edit_detail_hint"></EditText>
+
+    <com.rolling.view.recvcler.RlRecyclerView
+        android:id="@+id/rlRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.rolling.view.recvcler.RlRecyclerView>
+
+
+</LinearLayout>

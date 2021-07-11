@@ -45,7 +45,10 @@ public class ToolbarView extends RelativeLayout {
 
         if (attrs != null) {
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.layout_toolbar);
-            tvToolbarBack.setText(typedArray.getString(R.styleable.layout_toolbar_arrow_left));
+           if(typedArray.hasValue(R.styleable.layout_toolbar_arrow_left)){
+               tvToolbarBack.setCompoundDrawablesWithIntrinsicBounds(typedArray.getDrawable(R.styleable.layout_toolbar_arrow_left), null, null
+               , null);
+           }
             tvToolbarTitle.setText(typedArray.getString(R.styleable.layout_toolbar_title));
             String right = typedArray.getString(R.styleable.layout_toolbar_arrow_right);
             if (!TextUtils.isEmpty(right)) {

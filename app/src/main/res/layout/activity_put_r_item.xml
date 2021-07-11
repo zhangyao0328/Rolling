@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".act.main.frament.home.ritem.CreateRItemActivity">
+
+    <com.rolling.view.layout.ToolbarView
+        android:id="@+id/rootToobarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title= "@string/create_ritem_toolbar_title"
+        app:arrow_left="@drawable/arrows_left_ic"
+        app:arrow_right="@string/create_ritem_toolbar_right"
+        android:layout_alignParentTop="true"
+        ></com.rolling.view.layout.ToolbarView>
+
+     <androidx.core.widget.NestedScrollView
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_below="@+id/rootToobarView"
+         android:layout_above="@+id/viewBottom"
+         >
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical"
+             >
+
+             <com.rolling.view.FrescoImage
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 app:viewAspectRatio="1.9"
+                 app:placeholderImage="@color/color66000000"
+                 ></com.rolling.view.FrescoImage>
+
+<!--             <com.rolling.view.widget.SettingBar-->
+<!--                 android:id="@+id/sb_person_data_name"-->
+<!--                 android:layout_width="match_parent"-->
+<!--                 android:layout_height="wrap_content"-->
+<!--                 app:bar_leftText="@string/personal_data_name"-->
+<!--                 app:bar_rightHint="@string/personal_data_name_hint"-->
+<!--                 />-->
+
+             <com.yaoyao.yaolibrary.widget.SettingBarEditText
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 app:bar_leftText="@string/create_ritem_title"
+                 app:bar_rightEdHintText="@string/create_ritem_title_hint"
+                 app:bar_rightEdBg="@null"
+                 ></com.yaoyao.yaolibrary.widget.SettingBarEditText>
+
+             <com.yaoyao.yaolibrary.widget.SettingBar
+                 android:id="@+id/edDetail"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 app:bar_leftText="@string/create_ritem_detail_title"
+                 app:bar_rightIcon="@drawable/arrows_right_ic"
+                 ></com.yaoyao.yaolibrary.widget.SettingBar>
+
+
+
+
+         </LinearLayout>
+
+     </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/viewBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        >
+
+        <Button
+            android:id="@+id/btInsertImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="图片"
+            android:layout_weight="1"
+            ></Button>
+
+        <Button
+            android:id="@+id/btSaveDrafts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_ritem_bottom_save"
+            android:layout_weight="1"
+            ></Button>
+
+        <Button
+            android:id="@+id/btSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_ritem_bottom_put"
+            android:layout_weight="1"
+            ></Button>
+
+    </LinearLayout>
+
+</RelativeLayout>

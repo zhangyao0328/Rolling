@@ -15,6 +15,6 @@ public interface BasePresenter {
 
     void getAsync(Context context, BaseBean baseBean);
 
-    void postAsync(Context context, BaseBean baseBean);
+     void postAsync(Context context, BaseBean baseBean);
 
 }

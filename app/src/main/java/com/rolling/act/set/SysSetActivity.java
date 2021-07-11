@@ -23,6 +23,8 @@ public class SysSetActivity extends BaseActivity {
 
     private final int NET_TAG_SIGN_OUT = 1001;
 
+    float f = 3;
+
     @Override
     public int getLayoutContextView() {
         return R.layout.activity_sys_set;

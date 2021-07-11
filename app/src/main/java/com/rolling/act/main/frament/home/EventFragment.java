@@ -20,7 +20,7 @@ import com.rolling.bean.tab.TopTabBean;
 import com.rolling.bean.tab.TopTabListBean;
 import com.rolling.net.HttpConfig;
 import com.rolling.util.AppUtils;
-import com.rolling.view.RlRecyclerView;
+import com.rolling.view.recvcler.RlRecyclerView;
 import com.rolling.view.banner.Config;
 import com.rolling.view.banner.ImageAdapter;
 import com.rolling.view.layout.FilterView;

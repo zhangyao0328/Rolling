@@ -1,1 +1,2 @@
+include ':YaoLibrary'
 include ':app'

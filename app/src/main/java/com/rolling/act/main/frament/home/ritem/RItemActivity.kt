@@ -1,5 +1,6 @@
 package com.rolling.act.main.frament.home.ritem
 
+import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import butterknife.BindView
@@ -11,6 +12,7 @@ import com.rolling.bean.BaseDataBean
 import com.rolling.bean.home.Item
 import com.rolling.bean.home.RItemInfoBean
 import com.rolling.net.HttpConfig
+import com.rolling.util.OpenAcitivtyUtils
 import com.rolling.view.FrescoImage
 import com.rolling.view.TextViewIcon
 import com.squareup.moshi.Moshi
@@ -46,7 +48,7 @@ class RItemActivity : BaseActivity() {
         itemData = intent.getSerializableExtra(this.javaClass.name) as Item
         if (itemData != null) {
 
-//            getUserStatus()
+            getUserStatus()
             getUserList()
 //            getRItemInfo()
             refresh()
@@ -56,26 +58,26 @@ class RItemActivity : BaseActivity() {
     override fun succeed(t: Any?, tag: Int) {
         when (tag) {
             NET_TAG_USER_STATUS -> {
-                refresh()
-
                 val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
                 val bean = moshi.adapter(BaseDataBean::class.java).fromJson(t.toString())
                 if (bean != null) {
                     if (bean.code == 20402) {
+                        btAdd.setText("加入")
                         btAdd.visibility = View.VISIBLE
                     } else {
                         btAdd.visibility = View.GONE
                     }
                 }
-
             }
             NET_TAG_INFO -> {
                 val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
                 val bean = moshi.adapter(RItemInfoBean::class.java).fromJson(t.toString())
                 if (bean != null) {
                     itemData = bean.data
-                    refresh()
                 }
+            }
+            NET_TAG_ADD -> {
+                getUserStatus()
             }
         }
     }
@@ -86,27 +88,23 @@ class RItemActivity : BaseActivity() {
     private fun refresh() {
         tvTitle.text = itemData?.Name
         frescoCover.setImageURL(itemData?.Cover)
-
-        if (itemData!!.AdminUser == MyApplication.userLoginBean.data.id)
-            btAdd.visibility = View.GONE
-        else {
-            btAdd.setText("加入")
-            btAdd.visibility = View.VISIBLE
-        }
     }
 
-    @OnClick(R.id.btAdd)
+    @OnClick(R.id.btAdd, R.id.btCreate)
     fun onClicks(view: View) {
         when (view.id) {
             R.id.btAdd -> {
                 addRItem()
+            }
+            R.id.btCreate -> {
+                OpenAcitivtyUtils.openAct(MyApplication.getInstance(), CreateRItemActivity::class.java)
             }
         }
     }
 
     private fun getUserStatus() {
         var key: Array<String> = arrayOf("userId", "punchId")
-        var value: Array<String> = arrayOf(MyApplication.getUserLoginBean().data.id.toString(), itemData!!.Id.toString())
+        var value: Array<String> = arrayOf(MyApplication.getUserLoginBean()?.data?.id.toString(), itemData?.Id.toString())
         getLoad(HttpConfig.URL_API_PUNCH_USER_STATUS, key, value, NET_TAG_USER_STATUS, true)
     }
 
@@ -127,7 +125,7 @@ class RItemActivity : BaseActivity() {
      */
     private fun addRItem() {
         val map = mapOf("userId" to MyApplication.getUserLoginBean().data.id.toString(), "punchId" to itemData!!.Id.toString())
-        postLoad(HttpConfig.URL_API_PUNCH_ADD, map,  NET_TAG_ADD, true, null)
+        postLoad(HttpConfig.URL_API_PUNCH_ADD, map, NET_TAG_ADD, true, null)
     }
 
 

@@ -10,6 +10,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/YaoLibrary" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
@@ -17,6 +18,5 @@
         <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
     </option>
-    <option name="offlineMode" value="true" />
   </component>
 </project>

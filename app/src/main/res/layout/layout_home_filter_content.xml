@@ -9,19 +9,19 @@
     android:gravity="top"
     >
 
-    <com.rolling.view.RlRecyclerView
+    <com.rolling.view.recvcler.RlRecyclerView
         android:id="@+id/recyclerViewFilter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:visibility="gone"
-        ></com.rolling.view.RlRecyclerView>
+        ></com.rolling.view.recvcler.RlRecyclerView>
 
-    <com.rolling.view.RlRecyclerView
+    <com.rolling.view.recvcler.RlRecyclerView
         android:id="@+id/recyclerViewSort"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        android:visibility="gone"></com.rolling.view.RlRecyclerView>
+        android:visibility="gone"></com.rolling.view.recvcler.RlRecyclerView>
 
 </RelativeLayout>

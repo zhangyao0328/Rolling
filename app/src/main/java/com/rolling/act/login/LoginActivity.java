@@ -2,10 +2,11 @@ package com.rolling.act.login;
 
 import android.media.MediaPlayer;
 import android.net.Uri;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.alibaba.fastjson.JSON;
 import com.rolling.R;
@@ -18,6 +19,7 @@ import com.rolling.net.HttpConfig;
 import com.rolling.net.HttpManage;
 import com.rolling.util.CineLog;
 import com.rolling.util.CineToast;
+import com.rolling.util.OpenAcitivtyUtils;
 import com.rolling.util.ScreenUtils;
 import com.rolling.util.sp.RollingSp;
 import com.rolling.view.CustomVideoView;
@@ -77,7 +79,7 @@ public class LoginActivity extends BaseActivity {
                         MyApplication.userLoginBean = userLoginBean;
                         RollingSp.putData(this, RollingSp.ROLLING_USER_LOGIN_DATA, o.toString());
                         CineLog.e(" 用户登录成功");
-                        openActivity(MainActivity.class);
+                        OpenAcitivtyUtils.openAct(MyApplication.getInstance(), MainActivity.class);
                         break;
                     default:
                         if (!TextUtils.isEmpty(userLoginBean.getMessage())) {

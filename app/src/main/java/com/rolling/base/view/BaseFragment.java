@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.rolling.R;
 import com.rolling.base.prsenter.BasePresenter;
 import com.rolling.base.prsenter.BasePresenterImpl;
 import com.rolling.bean.BaseBean;
@@ -128,7 +130,6 @@ public abstract class BaseFragment extends Fragment implements BaseView{
 
     @Override
     public void responseCode(int code) {
-
     }
 
     public void closeRecycler(SwipeToLoadLayout swipeToLoadLayout) {

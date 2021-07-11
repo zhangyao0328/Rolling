@@ -10,7 +10,6 @@
         android:layout_width="@dimen/toolbar_h"
         android:layout_height="@dimen/toolbar_h"
         android:gravity="center"
-        android:text="@string/tv_arrow_left_icon"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true" />
 

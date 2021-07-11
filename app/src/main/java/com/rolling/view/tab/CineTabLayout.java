@@ -9,7 +9,7 @@ import android.view.View;
 import com.rolling.bean.tab.TopTabBean;
 import com.rolling.util.AppUtils;
 import com.rolling.util.CineLog;
-import com.rolling.view.RlRecyclerView;
+import com.rolling.view.recvcler.RlRecyclerView;
 import com.rolling.view.adapter.BaseSingleSelectAdapter;
 import com.rolling.view.adapter.OnItemClickListener;
 

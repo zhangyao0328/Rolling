@@ -13,7 +13,7 @@ import com.rolling.base.view.BaseActivity;
 import com.rolling.bean.home.HomeDataBean;
 import com.rolling.net.HttpConfig;
 import com.rolling.util.CineToast;
-import com.rolling.view.RlRecyclerView;
+import com.rolling.view.recvcler.RlRecyclerView;
 
 import java.util.HashMap;
 import java.util.Map;

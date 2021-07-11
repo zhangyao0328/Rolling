@@ -7,7 +7,7 @@ import com.rolling.base.view.BaseFragment;
 import com.rolling.net.HttpConfig;
 import com.rolling.util.CineLog;
 import com.rolling.util.LoginUtils;
-import com.rolling.view.RlRecyclerView;
+import com.rolling.view.recvcler.RlRecyclerView;
 
 import butterknife.BindView;
 

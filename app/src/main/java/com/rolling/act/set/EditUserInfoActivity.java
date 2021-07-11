@@ -26,7 +26,7 @@ import com.rolling.util.CineLog;
 import com.rolling.view.FrescoImage;
 import com.rolling.view.dialog.InputDialog;
 import com.rolling.view.layout.ToolbarView;
-import com.rolling.view.widget.SettingBar;
+import com.yaoyao.yaolibrary.widget.SettingBar;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

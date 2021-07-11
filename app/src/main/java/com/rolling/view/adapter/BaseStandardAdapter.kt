@@ -12,10 +12,12 @@ abstract class BaseStandardAdapter<T, VH : BaseViewHolder<*>?>(context: Context)
      var mContext = context
     var checkPosition = -1
     protected fun bindHolder(holder: VH, position: Int) {
-        convert(holder as VH, dataList[position])
+        convert(holder, dataList[position])
     }
 
     abstract fun convert(holder: VH, item: T)
+
+    @Suppress("UNCHECKED_CAST")
     override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
         holder.itemView.isClickable = true
         bindHolder(holder as VH, position)

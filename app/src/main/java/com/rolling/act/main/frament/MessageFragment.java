@@ -3,7 +3,7 @@ package com.rolling.act.main.frament;
 import com.rolling.R;
 import com.rolling.base.view.BaseFragment;
 import com.rolling.bean.msg.MessageBena;
-import com.rolling.view.RlRecyclerView;
+import com.rolling.view.recvcler.RlRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;

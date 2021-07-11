@@ -1,17 +1,20 @@
-package com.rolling.view;
+package com.rolling.view.recvcler;
 
 import android.content.Context;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
+import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
+import com.rolling.R;
 import com.rolling.util.CineLog;
 
 /**
@@ -40,7 +43,16 @@ public class RlRecyclerView extends RecyclerView {
     public void initCineRecyclerViewHorizontal10White(Context context) {
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         setLayoutManager(linearLayoutManager);
-        addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
+        addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL_LIST));
+    }
+
+    public void initCineRecyclerViewFlexboxLayoutManager(Context context) {
+        FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(context);
+        flexboxLayoutManager.setFlexWrap(FlexWrap.WRAP);
+        flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
+        flexboxLayoutManager.setAlignItems(AlignItems.STRETCH);
+        flexboxLayoutManager.setJustifyContent(JustifyContent.FLEX_START);
+        setLayoutManager(flexboxLayoutManager);
     }
 
     public void initCineRecyclerViewFlexboxLayoutManager2(Context context) {
@@ -49,6 +61,11 @@ public class RlRecyclerView extends RecyclerView {
         flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
         flexboxLayoutManager.setJustifyContent(JustifyContent.FLEX_START);
         setLayoutManager(flexboxLayoutManager);
+    }
+
+    public void initCineRecyclerViewGrid10White(Context context, int count) {
+        setLayoutManager(new GridLayoutManager(context, count));
+        addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.BOTH_SET, R.drawable.divider10_transparent_bg));
     }
 
 
@@ -84,6 +101,7 @@ public class RlRecyclerView extends RecyclerView {
             });
         }
     }
+
 
 
 }
